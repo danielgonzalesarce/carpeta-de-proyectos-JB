@@ -69,7 +69,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     position: relative;
-    padding-top: 100px; /* Espacio para el header fijo (ajustado para laptop) */
+    padding-top: 160px; /* Espacio para el header fijo con logo grande */
 }
 
 /* Cursor Personalizado */
@@ -164,7 +164,7 @@ body {
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 1.5rem 0;
+    padding: 2rem 0;
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -174,7 +174,11 @@ body {
 
 .header.scrolled {
     background: rgba(0, 0, 0, 0.8);
-    padding: 1rem 0;
+    padding: 1.5rem 0;
+}
+
+.header.scrolled .logo-img {
+    height: 100px;
 }
 
 .nav-container {
@@ -258,7 +262,7 @@ body {
 /* Hero Video Section */
 .hero-video {
     position: relative;
-    min-height: calc(100vh - 100px); /* Ajustado para el padding-top del body */
+    min-height: calc(100vh - 160px); /* Ajustado para el padding-top del body */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -861,10 +865,10 @@ body {
     
     .nav-links {
         position: fixed;
-        top: 70px;
+        top: 100px;
         right: -100%;
         width: 100%;
-        height: calc(100vh - 70px);
+        height: calc(100vh - 100px);
         background: rgba(0, 0, 0, 0.95);
         flex-direction: column;
         padding: 2rem;
@@ -880,7 +884,7 @@ body {
    Páginas de Detalle de Proyectos
    ============================================ */
 .proyecto-detalle {
-    min-height: calc(100vh - 100px); /* Ajustado para el padding-top del body */
+    min-height: calc(100vh - 160px); /* Ajustado para el padding-top del body */
     padding-top: 0;
     margin-top: 0;
 }
@@ -1318,11 +1322,11 @@ body {
     }
     
     .hero-video {
-        min-height: calc(100vh - 70px);
+        min-height: calc(100vh - 100px);
     }
     
     .proyecto-detalle {
-        min-height: calc(100vh - 70px);
+        min-height: calc(100vh - 100px);
     }
     
     .proyecto-header-detalle {
