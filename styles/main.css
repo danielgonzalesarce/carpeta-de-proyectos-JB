@@ -1216,12 +1216,12 @@ body {
     transition: var(--transition-smooth);
     position: relative;
     z-index: 1;
-    filter: drop-shadow(0 0 10px rgba(18, 52, 152, 0.3));
+    /* Sin filtros para mostrar iconos en su apariencia original */
 }
 
 .funcionalidad-card-detalle:hover .funcionalidad-icon-detalle {
     transform: scale(1.1) rotate(5deg);
-    filter: drop-shadow(0 0 20px rgba(18, 52, 152, 0.6));
+    /* Sin filtros para mantener apariencia original */
 }
 
 .funcionalidad-card-detalle h3 {
