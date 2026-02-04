@@ -121,8 +121,8 @@ body {
 }
 
 .preloader-logo {
-    width: 200px;
-    height: 200px;
+    width: 280px;
+    height: 280px;
     margin: 0 auto 2rem;
     opacity: 0;
 }
@@ -192,7 +192,7 @@ body {
 }
 
 .logo-img {
-    height: 65px;
+    height: 80px;
     width: auto;
     object-fit: contain;
     filter: drop-shadow(var(--glow-blue));
