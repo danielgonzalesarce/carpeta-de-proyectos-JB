@@ -468,3 +468,251 @@ function initYouTubeVideos() {
 if (document.querySelector('iframe[src*="youtube.com"]')) {
     initYouTubeVideos();
 }
+
+// ============================================
+// Animaciones para Páginas de Detalle
+// ============================================
+function initDetailPageAnimations() {
+    // Solo ejecutar si estamos en una página de detalle
+    if (!document.querySelector('.proyecto-detalle')) return;
+    
+    // Animación del header del proyecto
+    const proyectoHeader = document.querySelector('.proyecto-header-detalle');
+    if (proyectoHeader) {
+        const badge = proyectoHeader.querySelector('.proyecto-badge-detalle');
+        const title = proyectoHeader.querySelector('.proyecto-titulo-detalle');
+        const subtitle = proyectoHeader.querySelector('.proyecto-subtitulo-detalle');
+        
+        const headerTL = gsap.timeline({ delay: 0.3 });
+        
+        if (badge) {
+            headerTL.from(badge, {
+                y: 30,
+                opacity: 0,
+                duration: 0.8,
+                ease: 'power3.out'
+            });
+        }
+        
+        if (title) {
+            headerTL.from(title, {
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: 'power3.out'
+            }, '-=0.4');
+        }
+        
+        if (subtitle) {
+            headerTL.from(subtitle, {
+                y: 30,
+                opacity: 0,
+                duration: 0.8,
+                ease: 'power3.out'
+            }, '-=0.6');
+        }
+    }
+    
+    // Animación de la sección de video
+    const videoSection = document.querySelector('.video-section');
+    if (videoSection) {
+        gsap.from(videoSection, {
+            y: 80,
+            opacity: 0,
+            duration: 1.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: videoSection,
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            }
+        });
+        
+        const videoWrapper = videoSection.querySelector('.video-wrapper');
+        if (videoWrapper) {
+            gsap.from(videoWrapper, {
+                scale: 0.95,
+                opacity: 0,
+                duration: 1,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: videoWrapper,
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            });
+        }
+    }
+    
+    // Animaciones para todas las secciones de contenido
+    const contentSections = document.querySelectorAll('.descripcion-section, .feature-section');
+    
+    contentSections.forEach((section, index) => {
+        const contentBlock = section.querySelector('.content-block');
+        const contentText = section.querySelector('.content-text');
+        const contentImage = section.querySelector('.content-image');
+        const sectionHeading = section.querySelector('.section-heading');
+        
+        // Animación de entrada de la sección
+        gsap.from(section, {
+            y: 100,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: section,
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            },
+            delay: index * 0.1
+        });
+        
+        // Animación del heading
+        if (sectionHeading) {
+            gsap.from(sectionHeading, {
+                y: 50,
+                opacity: 0,
+                duration: 0.8,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: sectionHeading,
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            });
+        }
+        
+        // Animación del texto (staggered para párrafos)
+        if (contentText) {
+            const paragraphs = contentText.querySelectorAll('p');
+            paragraphs.forEach((p, pIndex) => {
+                gsap.from(p, {
+                    y: 40,
+                    opacity: 0,
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: p,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    },
+                    delay: pIndex * 0.15
+                });
+            });
+        }
+        
+        // Animación de la imagen con parallax
+        if (contentImage) {
+            const img = contentImage.querySelector('img');
+            
+            // Animación de entrada
+            gsap.from(contentImage, {
+                x: section.classList.contains('feature-right') ? 100 : -100,
+                opacity: 0,
+                duration: 1.2,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: contentImage,
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            });
+            
+            // Parallax effect en scroll
+            if (img) {
+                gsap.to(img, {
+                    y: -50,
+                    scrollTrigger: {
+                        trigger: contentImage,
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        scrub: 1
+                    }
+                });
+            }
+        }
+    });
+    
+    // Animación del botón de volver
+    const backSection = document.querySelector('.back-section');
+    if (backSection) {
+        const btnBack = backSection.querySelector('.btn-back');
+        
+        gsap.from(backSection, {
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: backSection,
+                start: 'top 90%',
+                toggleActions: 'play none none none'
+            }
+        });
+        
+        if (btnBack) {
+            btnBack.addEventListener('mouseenter', () => {
+                gsap.to(btnBack, {
+                    scale: 1.05,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            });
+            
+            btnBack.addEventListener('mouseleave', () => {
+                gsap.to(btnBack, {
+                    scale: 1,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            });
+        }
+    }
+    
+    // Animación de conclusion section si existe
+    const conclusionSection = document.querySelector('.conclusion-detalle');
+    if (conclusionSection) {
+        gsap.from(conclusionSection, {
+            y: 80,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: conclusionSection,
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            }
+        });
+        
+        const conclusionContent = conclusionSection.querySelector('.conclusion-content');
+        if (conclusionContent) {
+            const paragraphs = conclusionContent.querySelectorAll('p');
+            paragraphs.forEach((p, index) => {
+                gsap.from(p, {
+                    y: 40,
+                    opacity: 0,
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: p,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    },
+                    delay: index * 0.2
+                });
+            });
+        }
+    }
+}
+
+// Agregar animaciones de detalle a la función de inicialización
+function initAnimations() {
+    initCustomCursor();
+    initHeaderScroll();
+    initHeroAnimations();
+    initProyectosAnimations();
+    initSectionAnimations();
+    initSmoothScroll();
+    initMenuToggle();
+    initDetailPageAnimations(); // Nueva función para páginas de detalle
+}
