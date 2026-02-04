@@ -314,8 +314,9 @@ body {
     z-index: 3;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 4rem 2rem 0;
     width: 100%;
+    padding-top: 6rem; /* Espacio adicional para que el badge no quede oculto */
 }
 
 .hero-content {
