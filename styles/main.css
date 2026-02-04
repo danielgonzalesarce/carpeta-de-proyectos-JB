@@ -192,7 +192,7 @@ body {
 }
 
 .logo-img {
-    height: 80px;
+    height: 120px;
     width: auto;
     object-fit: contain;
     filter: drop-shadow(var(--glow-blue));
@@ -1282,7 +1282,23 @@ body {
 
 @media (max-width: 768px) {
     body {
-        padding-top: 70px; /* Menos espacio en móvil */
+        padding-top: 100px; /* Más espacio para logo grande */
+    }
+    
+    .header {
+        padding: 1.5rem 0;
+    }
+    
+    .header.scrolled {
+        padding: 1rem 0;
+    }
+    
+    .logo-img {
+        height: 70px;
+    }
+    
+    .header.scrolled .logo-img {
+        height: 60px;
     }
     
     .hero-title {
