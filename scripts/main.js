@@ -157,6 +157,37 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Detectar si los videos no cargan y mostrar mensaje
+    const videos = document.querySelectorAll('video');
+    videos.forEach(video => {
+        video.addEventListener('error', function() {
+            // Si el video no carga, ocultar el video y mostrar el mensaje de fallback
+            const videoWrapper = this.closest('.video-wrapper');
+            if (videoWrapper) {
+                const fallback = videoWrapper.querySelector('.video-fallback');
+                if (fallback) {
+                    this.style.display = 'none';
+                    fallback.style.display = 'block';
+                }
+            }
+        });
+
+        // También verificar después de un tiempo si el video no se carga
+        setTimeout(() => {
+            if (video.readyState === 0 && video.networkState === 3) {
+                // Video no disponible
+                const videoWrapper = video.closest('.video-wrapper');
+                if (videoWrapper) {
+                    const fallback = videoWrapper.querySelector('.video-fallback');
+                    if (fallback) {
+                        video.style.display = 'none';
+                        fallback.style.display = 'block';
+                    }
+                }
+            }
+        }, 3000);
+    });
+
     // Animación de números o estadísticas (si las hay)
     const animateNumbers = (element) => {
         const target = parseInt(element.getAttribute('data-target'));
