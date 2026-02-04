@@ -69,7 +69,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     position: relative;
-    padding-top: 80px; /* Espacio para el header fijo */
+    padding-top: 100px; /* Espacio para el header fijo (ajustado para laptop) */
 }
 
 /* Cursor Personalizado */
@@ -258,11 +258,13 @@ body {
 /* Hero Video Section */
 .hero-video {
     position: relative;
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 100px); /* Ajustado para el padding-top del body */
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    margin-top: 0;
+    padding-top: 0;
 }
 
 .hero-video-background {
@@ -878,8 +880,9 @@ body {
    Páginas de Detalle de Proyectos
    ============================================ */
 .proyecto-detalle {
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 100px); /* Ajustado para el padding-top del body */
     padding-top: 0;
+    margin-top: 0;
 }
 
 .proyecto-header-detalle {
@@ -888,9 +891,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 8rem 2rem 4rem;
+    padding: 6rem 2rem 4rem;
+    padding-top: 6rem; /* El body ya tiene padding-top */
     background: var(--bg-secondary);
     overflow: hidden;
+    margin-top: 0;
 }
 
 .proyecto-header-detalle::before {
@@ -1121,6 +1126,10 @@ body {
 }
 
 @media (max-width: 768px) {
+    body {
+        padding-top: 70px; /* Menos espacio en móvil */
+    }
+    
     .hero-title {
         font-size: clamp(2.5rem, 12vw, 5rem);
     }
@@ -1137,8 +1146,17 @@ body {
         padding: 2rem;
     }
     
+    .hero-video {
+        min-height: calc(100vh - 70px);
+    }
+    
+    .proyecto-detalle {
+        min-height: calc(100vh - 70px);
+    }
+    
     .proyecto-header-detalle {
-        padding: 6rem 1.5rem 3rem;
+        padding: 4rem 1.5rem 3rem;
+        padding-top: 4rem;
         min-height: 50vh;
     }
     
