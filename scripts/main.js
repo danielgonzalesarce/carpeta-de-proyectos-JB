@@ -738,6 +738,84 @@ function initDetailPageAnimations() {
         }
     }
     
+    // Animación de funcionalidades destacadas
+    const funcionalidadesSection = document.querySelector('.funcionalidades-detalle');
+    if (funcionalidadesSection) {
+        const heading = funcionalidadesSection.querySelector('.section-heading-center');
+        const cards = funcionalidadesSection.querySelectorAll('.funcionalidad-card-detalle');
+        
+        // Animación del heading
+        if (heading) {
+            gsap.from(heading, {
+                y: conclusionY,
+                opacity: 0,
+                duration: backDuration * 1.2,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: heading,
+                    start: isMobile ? 'top 90%' : 'top 80%',
+                    toggleActions: 'play none none none',
+                    once: true
+                }
+            });
+        }
+        
+        // Animación de las cards con stagger
+        cards.forEach((card, index) => {
+            gsap.from(card, {
+                y: 50,
+                opacity: 0,
+                scale: 0.9,
+                duration: backDuration,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: card,
+                    start: isMobile ? 'top 90%' : 'top 85%',
+                    toggleActions: 'play none none none',
+                    once: true
+                },
+                delay: index * 0.1
+            });
+            
+            // Hover effect con GSAP
+            card.addEventListener('mouseenter', () => {
+                gsap.to(card, {
+                    scale: 1.02,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+                
+                const icon = card.querySelector('.funcionalidad-icon-detalle');
+                if (icon) {
+                    gsap.to(icon, {
+                        scale: 1.15,
+                        rotation: 5,
+                        duration: 0.3,
+                        ease: 'power2.out'
+                    });
+                }
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                gsap.to(card, {
+                    scale: 1,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+                
+                const icon = card.querySelector('.funcionalidad-icon-detalle');
+                if (icon) {
+                    gsap.to(icon, {
+                        scale: 1,
+                        rotation: 0,
+                        duration: 0.3,
+                        ease: 'power2.out'
+                    });
+                }
+            });
+        });
+    }
+    
     // Animación de conclusion section si existe
     const conclusionSection = document.querySelector('.conclusion-detalle');
     if (conclusionSection) {
