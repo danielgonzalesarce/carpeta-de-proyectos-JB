@@ -476,6 +476,19 @@ function initDetailPageAnimations() {
     // Solo ejecutar si estamos en una página de detalle
     if (!document.querySelector('.proyecto-detalle')) return;
     
+    // Separar emojis del texto en los títulos para mantener su color original
+    const sectionHeadings = document.querySelectorAll('.section-heading');
+    sectionHeadings.forEach(heading => {
+        const text = heading.textContent;
+        // Detectar emoji al inicio (rango Unicode de emojis comunes)
+        const emojiMatch = text.match(/^([\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}])/u);
+        if (emojiMatch) {
+            const emoji = emojiMatch[1];
+            const restOfText = text.slice(emoji.length).trim();
+            heading.innerHTML = `<span class="emoji-icon">${emoji}</span><span class="heading-text">${restOfText}</span>`;
+        }
+    });
+    
     // Detectar tamaño de pantalla una sola vez
     const isMobile = window.innerWidth <= 768;
     const isTablet = window.innerWidth > 768 && window.innerWidth <= 1024;

@@ -1041,11 +1041,29 @@ body {
     font-weight: 700;
     margin-bottom: 2rem;
     line-height: 1.2;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Emoji mantiene su color original */
+.section-heading .emoji-icon {
+    font-style: normal;
+    -webkit-text-fill-color: initial;
+    color: initial;
+    background: none;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+    flex-shrink: 0;
+}
+
+/* Texto con gradiente */
+.section-heading .heading-text {
     background: var(--gradient-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    letter-spacing: -0.02em;
 }
 
 .content-text p {
