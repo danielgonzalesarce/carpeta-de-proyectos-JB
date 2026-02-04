@@ -1083,11 +1083,23 @@ body {
     transform: scale(1.02);
 }
 
-/* Efectos adicionales para animaciones */
-/* Las animaciones GSAP manejan la opacidad, no necesitamos opacity: 0 inicial */
+/* Asegurar visibilidad completa */
 .descripcion-section,
 .feature-section {
-    opacity: 1; /* Visible por defecto, GSAP animará desde opacity: 0 */
+    opacity: 1;
+    visibility: visible;
+}
+
+.content-text,
+.content-image {
+    opacity: 1;
+    visibility: visible;
+}
+
+.content-text p,
+.content-text h2 {
+    opacity: 1;
+    visibility: visible;
 }
 
 .back-section {
