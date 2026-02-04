@@ -476,8 +476,11 @@ function initDetailPageAnimations() {
     // Solo ejecutar si estamos en una página de detalle
     if (!document.querySelector('.proyecto-detalle')) return;
     
-    // Detectar tamaño de pantalla para header
+    // Detectar tamaño de pantalla una sola vez
     const isMobile = window.innerWidth <= 768;
+    const isTablet = window.innerWidth > 768 && window.innerWidth <= 1024;
+    
+    // Valores para header
     const headerDelay = isMobile ? 0.1 : 0.3;
     const headerY = isMobile ? 20 : 30;
     const headerTitleY = isMobile ? 30 : 50;
@@ -520,8 +523,7 @@ function initDetailPageAnimations() {
         }
     }
     
-    // Detectar tamaño de pantalla
-    const isMobile = window.innerWidth <= 768;
+    // Valores para video
     const videoStartTrigger = isMobile ? 'top 90%' : 'top 80%';
     const videoY = isMobile ? 40 : 80;
     const videoDuration = isMobile ? 0.6 : 1.2;
@@ -558,10 +560,6 @@ function initDetailPageAnimations() {
             });
         }
     }
-    
-    // Detectar tamaño de pantalla para ajustar animaciones
-    const isMobile = window.innerWidth <= 768;
-    const isTablet = window.innerWidth > 768 && window.innerWidth <= 1024;
     
     // Valores de animación adaptativos según pantalla
     const getAnimationValues = () => {
@@ -697,8 +695,7 @@ function initDetailPageAnimations() {
         }
     });
     
-    // Detectar tamaño de pantalla para botones y conclusion
-    const isMobile = window.innerWidth <= 768;
+    // Valores para botones y conclusion
     const backY = isMobile ? 30 : 50;
     const conclusionY = isMobile ? 50 : 80;
     const conclusionTextY = isMobile ? 20 : 40;
