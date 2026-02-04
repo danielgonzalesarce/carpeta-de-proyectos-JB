@@ -607,6 +607,9 @@ function initDetailPageAnimations() {
         const contentImage = section.querySelector('.content-image');
         const sectionHeading = section.querySelector('.section-heading');
         
+        // Asegurar que la sección sea visible inicialmente
+        gsap.set(section, { opacity: 1, y: 0 });
+        
         // Animación de entrada de la sección
         gsap.from(section, {
             y: animValues.sectionY,
@@ -616,10 +619,10 @@ function initDetailPageAnimations() {
             scrollTrigger: {
                 trigger: section,
                 start: animValues.startTrigger,
-                toggleActions: 'play none none none',
+                toggleActions: 'play none none reverse',
                 // Mejorar en móviles
                 markers: false,
-                once: true
+                once: false // Permitir re-animación si es necesario
             },
             delay: index * 0.05
         });

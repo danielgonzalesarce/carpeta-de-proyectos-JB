@@ -1062,22 +1062,10 @@ body {
 }
 
 /* Efectos adicionales para animaciones */
+/* Las animaciones GSAP manejan la opacidad, no necesitamos opacity: 0 inicial */
 .descripcion-section,
 .feature-section {
-    opacity: 0;
-}
-
-.descripcion-section.animate,
-.feature-section.animate {
-    opacity: 1;
-}
-
-.content-text p {
-    opacity: 0;
-}
-
-.content-text p.animate {
-    opacity: 1;
+    opacity: 1; /* Visible por defecto, GSAP animará desde opacity: 0 */
 }
 
 .back-section {
