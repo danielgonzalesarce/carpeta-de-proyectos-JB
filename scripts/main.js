@@ -1,305 +1,470 @@
 // ============================================
-// Animaciones al hacer scroll
+// GSAP Animations - Portafolio Futurista
 // ============================================
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Configuración del Intersection Observer para animaciones
-    const observerOptions = {
-        threshold: 0.2,
-        rootMargin: '0px 0px -100px 0px'
-    };
+// Registrar plugins de GSAP
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate');
-                // Opcional: dejar de observar después de animar
-                // observer.unobserve(entry.target);
+// ============================================
+// Preloader
+// ============================================
+function initPreloader() {
+    const preloader = document.querySelector('.preloader');
+    const preloaderBar = document.querySelector('.preloader-bar');
+    const preloaderLogo = document.querySelector('.preloader-logo');
+    const preloaderText = document.querySelector('.preloader-text');
+    
+    // Animación del logo
+    gsap.to(preloaderLogo, {
+        opacity: 1,
+        scale: 1,
+        duration: 0.8,
+        ease: 'power2.out',
+        delay: 0.2
+    });
+    
+    // Animación de la barra de progreso
+    gsap.to(preloaderBar, {
+        width: '100%',
+        duration: 2,
+        ease: 'power2.inOut',
+        delay: 0.5
+    });
+    
+    // Animación del texto
+    gsap.to(preloaderText, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: 'power2.out',
+        delay: 1
+    });
+    
+    // Ocultar preloader
+    gsap.to(preloader, {
+        opacity: 0,
+        scale: 1.1,
+        duration: 0.8,
+        ease: 'power2.in',
+        delay: 2.5,
+        onComplete: () => {
+            preloader.style.display = 'none';
+            initAnimations();
+        }
+    });
+}
+
+// ============================================
+// Cursor Personalizado
+// ============================================
+function initCustomCursor() {
+    const cursor = document.querySelector('.cursor');
+    const cursorFollower = document.querySelector('.cursor-follower');
+    
+    if (!cursor || !cursorFollower) return;
+    
+    let mouseX = 0;
+    let mouseY = 0;
+    let followerX = 0;
+    let followerY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        gsap.to(cursor, {
+            x: mouseX,
+            y: mouseY,
+            duration: 0.1,
+            ease: 'power2.out'
+        });
+    });
+    
+    // Animación suave del follower
+    function animateFollower() {
+        followerX += (mouseX - followerX) * 0.1;
+        followerY += (mouseY - followerY) * 0.1;
+        
+        gsap.set(cursorFollower, {
+            x: followerX,
+            y: followerY
+        });
+        
+        requestAnimationFrame(animateFollower);
+    }
+    animateFollower();
+    
+    // Efectos en hover
+    const hoverElements = document.querySelectorAll('a, button, .proyecto-card');
+    hoverElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            gsap.to(cursor, { scale: 1.5, duration: 0.3 });
+            gsap.to(cursorFollower, { scale: 1.5, opacity: 0.8, duration: 0.3 });
+        });
+        
+        el.addEventListener('mouseleave', () => {
+            gsap.to(cursor, { scale: 1, duration: 0.3 });
+            gsap.to(cursorFollower, { scale: 1, opacity: 0.5, duration: 0.3 });
+        });
+    });
+}
+
+// ============================================
+// Header Scroll Effect
+// ============================================
+function initHeaderScroll() {
+    const header = document.querySelector('.header');
+    
+    ScrollTrigger.create({
+        start: 'top -100',
+        end: 99999,
+        toggleClass: { className: 'scrolled', targets: header }
+    });
+}
+
+// ============================================
+// Hero Animations
+// ============================================
+function initHeroAnimations() {
+    const heroBadge = document.querySelector('.hero-badge');
+    const titleLines = document.querySelectorAll('.title-line');
+    const heroSubtitle = document.querySelector('.hero-subtitle');
+    const heroCTA = document.querySelector('.hero-cta');
+    const scrollIndicator = document.querySelector('.hero-scroll-indicator');
+    const shapes = document.querySelectorAll('.shape');
+    
+    // Timeline principal del hero
+    const heroTL = gsap.timeline({ delay: 0.5 });
+    
+    // Badge
+    if (heroBadge) {
+        heroTL.from(heroBadge, {
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            ease: 'power3.out'
+        });
+    }
+    
+    // Título con split animation
+    if (titleLines.length > 0) {
+        titleLines.forEach((line, index) => {
+            const words = line.textContent.split(' ');
+            line.innerHTML = words.map(word => `<span class="word">${word}</span>`).join(' ');
+            
+            const wordElements = line.querySelectorAll('.word');
+            heroTL.from(wordElements, {
+                y: 100,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: 'power3.out'
+            }, index * 0.2);
+        });
+    }
+    
+    // Subtítulo
+    if (heroSubtitle) {
+        heroTL.from(heroSubtitle, {
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            ease: 'power3.out'
+        }, '-=0.4');
+    }
+    
+    // CTA buttons
+    if (heroCTA) {
+        heroTL.from(heroCTA.children, {
+            y: 30,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: 'power3.out'
+        }, '-=0.4');
+    }
+    
+    // Scroll indicator
+    if (scrollIndicator) {
+        gsap.to(scrollIndicator, {
+            opacity: 0,
+            y: -20,
+            duration: 1,
+            repeat: -1,
+            yoyo: true,
+            ease: 'power2.inOut',
+            delay: 2
+        });
+    }
+    
+    // Shapes parallax
+    if (shapes.length > 0) {
+        shapes.forEach((shape, index) => {
+            gsap.to(shape, {
+                y: '+=50',
+                x: index % 2 === 0 ? '+=30' : '-=30',
+                duration: 3 + index,
+                repeat: -1,
+                yoyo: true,
+                ease: 'sine.inOut'
+            });
+        });
+    }
+}
+
+// ============================================
+// Split Text Animation Helper
+// ============================================
+function splitTextAnimation(element) {
+    if (!element) return;
+    
+    const text = element.textContent;
+    const words = text.split(' ');
+    element.innerHTML = words.map(word => `<span class="word">${word}</span>`).join(' ');
+    
+    const wordElements = element.querySelectorAll('.word');
+    gsap.from(wordElements, {
+        y: 50,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.05,
+        ease: 'power3.out',
+        scrollTrigger: {
+            trigger: element,
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+        }
+    });
+}
+
+// ============================================
+// Proyectos Cards Animations
+// ============================================
+function initProyectosAnimations() {
+    const cards = document.querySelectorAll('.proyecto-card');
+    
+    cards.forEach((card, index) => {
+        const cardInner = card.querySelector('.proyecto-card-inner');
+        const cardImage = card.querySelector('.card-img');
+        const cardContent = card.querySelector('.proyecto-card-content');
+        const cardHoverEffect = card.querySelector('.card-hover-effect');
+        
+        // Animación de entrada
+        gsap.from(card, {
+            y: 100,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: card,
+                start: 'top 85%',
+                toggleActions: 'play none none none'
+            },
+            delay: index * 0.2
+        });
+        
+        // Parallax en la imagen
+        if (cardImage) {
+            gsap.to(cardImage, {
+                y: -30,
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 1
+                }
+            });
+        }
+        
+        // Hover effect
+        card.addEventListener('mouseenter', () => {
+            gsap.to(card, {
+                scale: 1.02,
+                duration: 0.4,
+                ease: 'power2.out'
+            });
+            
+            gsap.to(cardImage, {
+                scale: 1.1,
+                duration: 0.6,
+                ease: 'power2.out'
+            });
+            
+            if (cardHoverEffect) {
+                gsap.to(cardHoverEffect, {
+                    opacity: 0.1,
+                    duration: 0.4,
+                    ease: 'power2.out'
+                });
             }
         });
-    }, observerOptions);
-
-    // Observar elementos de contenido en páginas de detalle
-    const contentTexts = document.querySelectorAll('.content-text');
-    const contentImages = document.querySelectorAll('.content-image');
-
-    contentTexts.forEach(element => {
-        observer.observe(element);
+        
+        card.addEventListener('mouseleave', () => {
+            gsap.to(card, {
+                scale: 1,
+                duration: 0.4,
+                ease: 'power2.out'
+            });
+            
+            gsap.to(cardImage, {
+                scale: 1,
+                duration: 0.6,
+                ease: 'power2.out'
+            });
+            
+            if (cardHoverEffect) {
+                gsap.to(cardHoverEffect, {
+                    opacity: 0,
+                    duration: 0.4,
+                    ease: 'power2.out'
+                });
+            }
+        });
     });
+}
 
-    contentImages.forEach(element => {
-        observer.observe(element);
-    });
+// ============================================
+// Section Header Animations
+// ============================================
+function initSectionAnimations() {
+    const sectionNumber = document.querySelector('.section-number');
+    const titleWords = document.querySelectorAll('.title-word');
+    const sectionDescription = document.querySelector('.section-description');
+    
+    // Número
+    if (sectionNumber) {
+        gsap.from(sectionNumber, {
+            x: -50,
+            opacity: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: sectionNumber,
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            }
+        });
+    }
+    
+    // Título
+    if (titleWords.length > 0) {
+        titleWords.forEach((word, index) => {
+            splitTextAnimation(word);
+        });
+    }
+    
+    // Descripción
+    if (sectionDescription) {
+        splitTextAnimation(sectionDescription);
+    }
+}
 
-    // Observar cards del blog
-    const blogCards = document.querySelectorAll('.blog-card');
-    blogCards.forEach((card, index) => {
-        card.style.animationDelay = `${index * 0.1}s`;
-        observer.observe(card);
-    });
-
-    // Smooth scroll para enlaces de navegación
+// ============================================
+// Smooth Scroll
+// ============================================
+function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+        anchor.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
             if (href !== '#' && href !== '') {
                 e.preventDefault();
                 const target = document.querySelector(href);
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    gsap.to(window, {
+                        duration: 1.5,
+                        scrollTo: {
+                            y: target,
+                            offsetY: 80
+                        },
+                        ease: 'power3.inOut'
                     });
                 }
             }
         });
     });
+}
 
-    // Efecto parallax sutil en imágenes (solo cuando están visibles)
-    const parallaxImages = document.querySelectorAll('.content-image img');
+// ============================================
+// Menu Toggle
+// ============================================
+function initMenuToggle() {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
     
-    let ticking = false;
-    
-    function updateParallax() {
-        const scrolled = window.pageYOffset;
-        
-        parallaxImages.forEach(img => {
-            const rect = img.getBoundingClientRect();
-            const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
             
-            if (isVisible && img.classList.contains('animate')) {
-                const speed = 0.05;
-                const yPos = -(scrolled * speed);
-                img.style.transform = `translateY(${yPos}px)`;
-            }
-        });
-        
-        ticking = false;
-    }
-    
-    window.addEventListener('scroll', () => {
-        if (!ticking) {
-            window.requestAnimationFrame(updateParallax);
-            ticking = true;
-        }
-    });
-
-    // Animación de entrada para el header del proyecto
-    const proyectoHeader = document.querySelector('.proyecto-header-detalle');
-    if (proyectoHeader) {
-        proyectoHeader.style.opacity = '0';
-        proyectoHeader.style.transform = 'translateY(-20px)';
-        proyectoHeader.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-        
-        setTimeout(() => {
-            proyectoHeader.style.opacity = '1';
-            proyectoHeader.style.transform = 'translateY(0)';
-        }, 100);
-    }
-
-    // Animación de entrada para el video
-    const videoSection = document.querySelector('.video-section');
-    if (videoSection) {
-        const videoWrapper = videoSection.querySelector('.video-wrapper');
-        if (videoWrapper) {
-            videoWrapper.style.opacity = '0';
-            videoWrapper.style.transform = 'scale(0.95)';
-            videoWrapper.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-            
-            setTimeout(() => {
-                videoWrapper.style.opacity = '1';
-                videoWrapper.style.transform = 'scale(1)';
-            }, 300);
-        }
-    }
-
-    // Efecto hover mejorado en cards del blog
-    const blogCardImages = document.querySelectorAll('.blog-card-image');
-    blogCardImages.forEach(cardImage => {
-        cardImage.addEventListener('mouseenter', function() {
-            const img = this.querySelector('img');
-            if (img) {
-                img.style.transform = 'scale(1.15)';
-            }
-        });
-        
-        cardImage.addEventListener('mouseleave', function() {
-            const img = this.querySelector('img');
-            if (img) {
-                img.style.transform = 'scale(1)';
-            }
-        });
-    });
-
-    // Lazy loading para imágenes (si no está implementado nativamente)
-    if ('loading' in HTMLImageElement.prototype) {
-        const images = document.querySelectorAll('img[loading="lazy"]');
-        images.forEach(img => {
-            img.src = img.dataset.src || img.src;
-        });
-    } else {
-        // Fallback para navegadores que no soportan lazy loading
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    if (img.dataset.src) {
-                        img.src = img.dataset.src;
-                        img.removeAttribute('data-src');
-                    }
-                    observer.unobserve(img);
-                }
-            });
-        });
-
-        document.querySelectorAll('img[data-src]').forEach(img => {
-            imageObserver.observe(img);
-        });
-    }
-
-    // Detectar si los videos no cargan y mostrar mensaje
-    const videos = document.querySelectorAll('video');
-    videos.forEach(video => {
-        video.addEventListener('error', function() {
-            // Si el video no carga, ocultar el video y mostrar el mensaje de fallback
-            const videoWrapper = this.closest('.video-wrapper');
-            if (videoWrapper) {
-                const fallback = videoWrapper.querySelector('.video-fallback');
-                if (fallback) {
-                    this.style.display = 'none';
-                    fallback.style.display = 'block';
-                }
-            }
-        });
-
-        // También verificar después de un tiempo si el video no se carga
-        setTimeout(() => {
-            if (video.readyState === 0 && video.networkState === 3) {
-                // Video no disponible
-                const videoWrapper = video.closest('.video-wrapper');
-                if (videoWrapper) {
-                    const fallback = videoWrapper.querySelector('.video-fallback');
-                    if (fallback) {
-                        video.style.display = 'none';
-                        fallback.style.display = 'block';
-                    }
-                }
-            }
-        }, 3000);
-    });
-
-    // Animación de números o estadísticas (si las hay)
-    const animateNumbers = (element) => {
-        const target = parseInt(element.getAttribute('data-target'));
-        const duration = 2000;
-        const increment = target / (duration / 16);
-        let current = 0;
-
-        const updateNumber = () => {
-            current += increment;
-            if (current < target) {
-                element.textContent = Math.floor(current);
-                requestAnimationFrame(updateNumber);
+            // Animación de las líneas del menú
+            const spans = menuToggle.querySelectorAll('span');
+            if (navLinks.classList.contains('active')) {
+                gsap.to(spans[0], { rotation: 45, y: 7, duration: 0.3 });
+                gsap.to(spans[1], { opacity: 0, duration: 0.3 });
+                gsap.to(spans[2], { rotation: -45, y: -7, duration: 0.3 });
             } else {
-                element.textContent = target;
+                gsap.to(spans, { rotation: 0, y: 0, opacity: 1, duration: 0.3 });
             }
-        };
+        });
+    }
+}
 
-        updateNumber();
+// ============================================
+// Inicializar todas las animaciones
+// ============================================
+function initAnimations() {
+    initCustomCursor();
+    initHeaderScroll();
+    initHeroAnimations();
+    initProyectosAnimations();
+    initSectionAnimations();
+    initSmoothScroll();
+    initMenuToggle();
+}
+
+// ============================================
+// Inicializar cuando el DOM esté listo
+// ============================================
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPreloader);
+} else {
+    initPreloader();
+}
+
+// ============================================
+// YouTube Video Autoplay (para páginas de detalle)
+// ============================================
+function initYouTubeVideos() {
+    const videoIframes = document.querySelectorAll('iframe[src*="youtube.com"]');
+    
+    if (videoIframes.length === 0) return;
+    
+    // Cargar YouTube Iframe API
+    if (!window.YT) {
+        const tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/iframe_api';
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    }
+    
+    window.onYouTubeIframeAPIReady = function() {
+        videoIframes.forEach(iframe => {
+            const videoId = iframe.id;
+            if (videoId) {
+                const player = new YT.Player(videoId, {
+                    events: {
+                        'onReady': function(event) {
+                            event.target.playVideo();
+                            event.target.mute();
+                            event.target.setLoop(true);
+                        }
+                    }
+                });
+            }
+        });
     };
+}
 
-    const numberElements = document.querySelectorAll('[data-target]');
-    numberElements.forEach(element => {
-        observer.observe(element);
-        element.addEventListener('animationstart', () => {
-            animateNumbers(element);
-        });
-    });
-});
-
-// ============================================
-// Navegación entre páginas
-// ============================================
-
-// Prevenir comportamiento por defecto en links de cards del blog
-document.addEventListener('DOMContentLoaded', function() {
-    const blogCards = document.querySelectorAll('.blog-card');
-    blogCards.forEach(card => {
-        const link = card.querySelector('.blog-card-link');
-        if (link) {
-            card.addEventListener('click', function(e) {
-                // Si el click no es en el link, navegar al link
-                if (e.target !== link && !link.contains(e.target)) {
-                    e.preventDefault();
-                    window.location.href = link.href;
-                }
-            });
-        }
-    });
-});
-
-// ============================================
-// Forzar autoplay de videos de YouTube
-// ============================================
-
-// Cargar la API de YouTube
-let tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-let firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-let youtubePlayers = {};
-
-// Función global que se llama cuando la API de YouTube está lista
-window.onYouTubeIframeAPIReady = function() {
-    // Inicializar player de BookHaven si existe
-    const bookhavenIframe = document.getElementById('bookhaven-video');
-    if (bookhavenIframe) {
-        youtubePlayers['bookhaven'] = new YT.Player('bookhaven-video', {
-            events: {
-                'onReady': function(event) {
-                    // Forzar reproducción automática cuando esté listo
-                    setTimeout(function() {
-                        event.target.playVideo();
-                    }, 500);
-                }
-            }
-        });
-    }
-
-    // Inicializar player de PlataformaTesis si existe
-    const plataformaTesisIframe = document.getElementById('plataforma-tesis-video');
-    if (plataformaTesisIframe) {
-        youtubePlayers['plataforma-tesis'] = new YT.Player('plataforma-tesis-video', {
-            events: {
-                'onReady': function(event) {
-                    // Forzar reproducción automática cuando esté listo
-                    setTimeout(function() {
-                        event.target.playVideo();
-                    }, 500);
-                }
-            }
-        });
-    }
-};
-
-// Fallback: Asegurar que los parámetros de autoplay estén en la URL
-document.addEventListener('DOMContentLoaded', function() {
-    const iframes = document.querySelectorAll('.video-wrapper iframe');
-    iframes.forEach(function(iframe) {
-        const currentSrc = iframe.src;
-        // Asegurar que autoplay y mute estén en la URL
-        if (currentSrc.indexOf('autoplay=1') === -1 || currentSrc.indexOf('mute=1') === -1) {
-            const separator = currentSrc.indexOf('?') === -1 ? '?' : '&';
-            let newSrc = currentSrc;
-            if (currentSrc.indexOf('autoplay=1') === -1) {
-                newSrc += separator + 'autoplay=1';
-            }
-            if (currentSrc.indexOf('mute=1') === -1) {
-                newSrc += (newSrc.indexOf('?') === -1 ? '?' : '&') + 'mute=1';
-            }
-            iframe.src = newSrc;
-        }
-    });
-});
-
+// Inicializar videos de YouTube si existen
+if (document.querySelector('iframe[src*="youtube.com"]')) {
+    initYouTubeVideos();
+}
