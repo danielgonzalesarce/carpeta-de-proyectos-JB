@@ -957,7 +957,7 @@ body {
 
 .video-section {
     padding: 4rem 2rem;
-    background: transparent;
+    background: var(--bg-primary);
     position: relative;
 }
 
@@ -991,10 +991,12 @@ body {
 
 .descripcion-section {
     background: var(--bg-secondary);
+    min-height: 400px; /* Asegurar altura mínima */
 }
 
 .feature-section {
     background: var(--bg-primary);
+    min-height: 400px; /* Asegurar altura mínima */
 }
 
 .feature-section.feature-right {
