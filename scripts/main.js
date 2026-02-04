@@ -476,6 +476,13 @@ function initDetailPageAnimations() {
     // Solo ejecutar si estamos en una página de detalle
     if (!document.querySelector('.proyecto-detalle')) return;
     
+    // Detectar tamaño de pantalla para header
+    const isMobile = window.innerWidth <= 768;
+    const headerDelay = isMobile ? 0.1 : 0.3;
+    const headerY = isMobile ? 20 : 30;
+    const headerTitleY = isMobile ? 30 : 50;
+    const headerDuration = isMobile ? 0.6 : 0.8;
+    
     // Animación del header del proyecto
     const proyectoHeader = document.querySelector('.proyecto-header-detalle');
     if (proyectoHeader) {
@@ -483,66 +490,115 @@ function initDetailPageAnimations() {
         const title = proyectoHeader.querySelector('.proyecto-titulo-detalle');
         const subtitle = proyectoHeader.querySelector('.proyecto-subtitulo-detalle');
         
-        const headerTL = gsap.timeline({ delay: 0.3 });
+        const headerTL = gsap.timeline({ delay: headerDelay });
         
         if (badge) {
             headerTL.from(badge, {
-                y: 30,
+                y: headerY,
                 opacity: 0,
-                duration: 0.8,
+                duration: headerDuration,
                 ease: 'power3.out'
             });
         }
         
         if (title) {
             headerTL.from(title, {
-                y: 50,
+                y: headerTitleY,
                 opacity: 0,
-                duration: 1,
+                duration: headerDuration * 1.2,
                 ease: 'power3.out'
             }, '-=0.4');
         }
         
         if (subtitle) {
             headerTL.from(subtitle, {
-                y: 30,
+                y: headerY,
                 opacity: 0,
-                duration: 0.8,
+                duration: headerDuration,
                 ease: 'power3.out'
             }, '-=0.6');
         }
     }
     
+    // Detectar tamaño de pantalla
+    const isMobile = window.innerWidth <= 768;
+    const videoStartTrigger = isMobile ? 'top 90%' : 'top 80%';
+    const videoY = isMobile ? 40 : 80;
+    const videoDuration = isMobile ? 0.6 : 1.2;
+    
     // Animación de la sección de video
     const videoSection = document.querySelector('.video-section');
     if (videoSection) {
         gsap.from(videoSection, {
-            y: 80,
+            y: videoY,
             opacity: 0,
-            duration: 1.2,
+            duration: videoDuration,
             ease: 'power3.out',
             scrollTrigger: {
                 trigger: videoSection,
-                start: 'top 80%',
-                toggleActions: 'play none none none'
+                start: videoStartTrigger,
+                toggleActions: 'play none none none',
+                once: true
             }
         });
         
         const videoWrapper = videoSection.querySelector('.video-wrapper');
         if (videoWrapper) {
             gsap.from(videoWrapper, {
-                scale: 0.95,
+                scale: isMobile ? 0.98 : 0.95,
                 opacity: 0,
-                duration: 1,
+                duration: videoDuration * 0.8,
                 ease: 'power3.out',
                 scrollTrigger: {
                     trigger: videoWrapper,
-                    start: 'top 85%',
-                    toggleActions: 'play none none none'
+                    start: videoStartTrigger,
+                    toggleActions: 'play none none none',
+                    once: true
                 }
             });
         }
     }
+    
+    // Detectar tamaño de pantalla para ajustar animaciones
+    const isMobile = window.innerWidth <= 768;
+    const isTablet = window.innerWidth > 768 && window.innerWidth <= 1024;
+    
+    // Valores de animación adaptativos según pantalla
+    const getAnimationValues = () => {
+        if (isMobile) {
+            return {
+                sectionY: 50,
+                headingY: 30,
+                textY: 20,
+                imageX: 30,
+                parallaxY: -20,
+                duration: 0.6,
+                startTrigger: 'top 90%'
+            };
+        } else if (isTablet) {
+            return {
+                sectionY: 70,
+                headingY: 40,
+                textY: 30,
+                imageX: 60,
+                parallaxY: -35,
+                duration: 0.8,
+                startTrigger: 'top 85%'
+            };
+        } else {
+            return {
+                sectionY: 100,
+                headingY: 50,
+                textY: 40,
+                imageX: 100,
+                parallaxY: -50,
+                duration: 1,
+                startTrigger: 'top 80%'
+            };
+        }
+    };
+    
+    const animValues = getAnimationValues();
     
     // Animaciones para todas las secciones de contenido
     const contentSections = document.querySelectorAll('.descripcion-section, .feature-section');
@@ -555,29 +611,33 @@ function initDetailPageAnimations() {
         
         // Animación de entrada de la sección
         gsap.from(section, {
-            y: 100,
+            y: animValues.sectionY,
             opacity: 0,
-            duration: 1,
+            duration: animValues.duration,
             ease: 'power3.out',
             scrollTrigger: {
                 trigger: section,
-                start: 'top 80%',
-                toggleActions: 'play none none none'
+                start: animValues.startTrigger,
+                toggleActions: 'play none none none',
+                // Mejorar en móviles
+                markers: false,
+                once: true
             },
-            delay: index * 0.1
+            delay: index * 0.05
         });
         
         // Animación del heading
         if (sectionHeading) {
             gsap.from(sectionHeading, {
-                y: 50,
+                y: animValues.headingY,
                 opacity: 0,
-                duration: 0.8,
+                duration: animValues.duration * 0.8,
                 ease: 'power3.out',
                 scrollTrigger: {
                     trigger: sectionHeading,
-                    start: 'top 85%',
-                    toggleActions: 'play none none none'
+                    start: animValues.startTrigger,
+                    toggleActions: 'play none none none',
+                    once: true
                 }
             });
         }
@@ -587,51 +647,62 @@ function initDetailPageAnimations() {
             const paragraphs = contentText.querySelectorAll('p');
             paragraphs.forEach((p, pIndex) => {
                 gsap.from(p, {
-                    y: 40,
+                    y: animValues.textY,
                     opacity: 0,
-                    duration: 0.8,
+                    duration: animValues.duration * 0.8,
                     ease: 'power3.out',
                     scrollTrigger: {
                         trigger: p,
-                        start: 'top 85%',
-                        toggleActions: 'play none none none'
+                        start: animValues.startTrigger,
+                        toggleActions: 'play none none none',
+                        once: true
                     },
-                    delay: pIndex * 0.15
+                    delay: pIndex * (isMobile ? 0.1 : 0.15)
                 });
             });
         }
         
-        // Animación de la imagen con parallax
+        // Animación de la imagen con parallax (solo en desktop)
         if (contentImage) {
             const img = contentImage.querySelector('img');
             
             // Animación de entrada
             gsap.from(contentImage, {
-                x: section.classList.contains('feature-right') ? 100 : -100,
+                x: section.classList.contains('feature-right') ? animValues.imageX : -animValues.imageX,
                 opacity: 0,
-                duration: 1.2,
+                duration: animValues.duration * 1.2,
                 ease: 'power3.out',
                 scrollTrigger: {
                     trigger: contentImage,
-                    start: 'top 85%',
-                    toggleActions: 'play none none none'
+                    start: animValues.startTrigger,
+                    toggleActions: 'play none none none',
+                    once: true
                 }
             });
             
-            // Parallax effect en scroll
-            if (img) {
+            // Parallax effect en scroll (solo desktop y tablet)
+            if (img && !isMobile) {
                 gsap.to(img, {
-                    y: -50,
+                    y: animValues.parallaxY,
                     scrollTrigger: {
                         trigger: contentImage,
                         start: 'top bottom',
                         end: 'bottom top',
-                        scrub: 1
+                        scrub: 1,
+                        // Desactivar parallax en móviles para mejor performance
+                        invalidateOnRefresh: true
                     }
                 });
             }
         }
     });
+    
+    // Detectar tamaño de pantalla para botones y conclusion
+    const isMobile = window.innerWidth <= 768;
+    const backY = isMobile ? 30 : 50;
+    const conclusionY = isMobile ? 50 : 80;
+    const conclusionTextY = isMobile ? 20 : 40;
+    const backDuration = isMobile ? 0.6 : 0.8;
     
     // Animación del botón de volver
     const backSection = document.querySelector('.back-section');
@@ -639,14 +710,15 @@ function initDetailPageAnimations() {
         const btnBack = backSection.querySelector('.btn-back');
         
         gsap.from(backSection, {
-            y: 50,
+            y: backY,
             opacity: 0,
-            duration: 0.8,
+            duration: backDuration,
             ease: 'power3.out',
             scrollTrigger: {
                 trigger: backSection,
                 start: 'top 90%',
-                toggleActions: 'play none none none'
+                toggleActions: 'play none none none',
+                once: true
             }
         });
         
@@ -673,14 +745,15 @@ function initDetailPageAnimations() {
     const conclusionSection = document.querySelector('.conclusion-detalle');
     if (conclusionSection) {
         gsap.from(conclusionSection, {
-            y: 80,
+            y: conclusionY,
             opacity: 0,
-            duration: 1,
+            duration: backDuration * 1.2,
             ease: 'power3.out',
             scrollTrigger: {
                 trigger: conclusionSection,
-                start: 'top 80%',
-                toggleActions: 'play none none none'
+                start: isMobile ? 'top 90%' : 'top 80%',
+                toggleActions: 'play none none none',
+                once: true
             }
         });
         
@@ -689,16 +762,17 @@ function initDetailPageAnimations() {
             const paragraphs = conclusionContent.querySelectorAll('p');
             paragraphs.forEach((p, index) => {
                 gsap.from(p, {
-                    y: 40,
+                    y: conclusionTextY,
                     opacity: 0,
-                    duration: 0.8,
+                    duration: backDuration,
                     ease: 'power3.out',
                     scrollTrigger: {
                         trigger: p,
-                        start: 'top 85%',
-                        toggleActions: 'play none none none'
+                        start: isMobile ? 'top 90%' : 'top 85%',
+                        toggleActions: 'play none none none',
+                        once: true
                     },
-                    delay: index * 0.2
+                    delay: index * (isMobile ? 0.15 : 0.2)
                 });
             });
         }
