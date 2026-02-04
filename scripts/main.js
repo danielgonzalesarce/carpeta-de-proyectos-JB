@@ -238,3 +238,59 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// ============================================
+// Forzar autoplay de videos de YouTube
+// ============================================
+
+// Cargar la API de YouTube
+let tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+let firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+let youtubePlayers = {};
+
+// Función que se llama cuando la API de YouTube está lista
+function onYouTubeIframeAPIReady() {
+    // Inicializar player de BookHaven si existe
+    const bookhavenIframe = document.getElementById('bookhaven-video');
+    if (bookhavenIframe) {
+        youtubePlayers['bookhaven'] = new YT.Player('bookhaven-video', {
+            events: {
+                'onReady': function(event) {
+                    // Forzar reproducción automática cuando esté listo
+                    event.target.playVideo();
+                }
+            }
+        });
+    }
+
+    // Inicializar player de PlataformaTesis si existe
+    const plataformaTesisIframe = document.getElementById('plataforma-tesis-video');
+    if (plataformaTesisIframe) {
+        youtubePlayers['plataforma-tesis'] = new YT.Player('plataforma-tesis-video', {
+            events: {
+                'onReady': function(event) {
+                    // Forzar reproducción automática cuando esté listo
+                    event.target.playVideo();
+                }
+            }
+        });
+    }
+}
+
+// Fallback: Intentar reproducir automáticamente cuando el iframe carga
+document.addEventListener('DOMContentLoaded', function() {
+    // Esperar a que los iframes carguen
+    setTimeout(function() {
+        const iframes = document.querySelectorAll('.video-wrapper iframe');
+        iframes.forEach(function(iframe) {
+            // Intentar forzar autoplay cambiando el src
+            const currentSrc = iframe.src;
+            if (currentSrc.indexOf('autoplay=1') === -1) {
+                iframe.src = currentSrc + (currentSrc.indexOf('?') === -1 ? '?' : '&') + 'autoplay=1&mute=1';
+            }
+        });
+    }, 1000);
+});
+
