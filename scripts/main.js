@@ -250,8 +250,8 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 let youtubePlayers = {};
 
-// Función que se llama cuando la API de YouTube está lista
-function onYouTubeIframeAPIReady() {
+// Función global que se llama cuando la API de YouTube está lista
+window.onYouTubeIframeAPIReady = function() {
     // Inicializar player de BookHaven si existe
     const bookhavenIframe = document.getElementById('bookhaven-video');
     if (bookhavenIframe) {
@@ -259,7 +259,9 @@ function onYouTubeIframeAPIReady() {
             events: {
                 'onReady': function(event) {
                     // Forzar reproducción automática cuando esté listo
-                    event.target.playVideo();
+                    setTimeout(function() {
+                        event.target.playVideo();
+                    }, 500);
                 }
             }
         });
@@ -272,25 +274,32 @@ function onYouTubeIframeAPIReady() {
             events: {
                 'onReady': function(event) {
                     // Forzar reproducción automática cuando esté listo
-                    event.target.playVideo();
+                    setTimeout(function() {
+                        event.target.playVideo();
+                    }, 500);
                 }
             }
         });
     }
-}
+};
 
-// Fallback: Intentar reproducir automáticamente cuando el iframe carga
+// Fallback: Asegurar que los parámetros de autoplay estén en la URL
 document.addEventListener('DOMContentLoaded', function() {
-    // Esperar a que los iframes carguen
-    setTimeout(function() {
-        const iframes = document.querySelectorAll('.video-wrapper iframe');
-        iframes.forEach(function(iframe) {
-            // Intentar forzar autoplay cambiando el src
-            const currentSrc = iframe.src;
+    const iframes = document.querySelectorAll('.video-wrapper iframe');
+    iframes.forEach(function(iframe) {
+        const currentSrc = iframe.src;
+        // Asegurar que autoplay y mute estén en la URL
+        if (currentSrc.indexOf('autoplay=1') === -1 || currentSrc.indexOf('mute=1') === -1) {
+            const separator = currentSrc.indexOf('?') === -1 ? '?' : '&';
+            let newSrc = currentSrc;
             if (currentSrc.indexOf('autoplay=1') === -1) {
-                iframe.src = currentSrc + (currentSrc.indexOf('?') === -1 ? '?' : '&') + 'autoplay=1&mute=1';
+                newSrc += separator + 'autoplay=1';
             }
-        });
-    }, 1000);
+            if (currentSrc.indexOf('mute=1') === -1) {
+                newSrc += (newSrc.indexOf('?') === -1 ? '?' : '&') + 'mute=1';
+            }
+            iframe.src = newSrc;
+        }
+    });
 });
 
