@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BookHaven - Plataforma de comercio electrónico full-stack especializada en libros">
+    <title>BookHaven | Consultora JB</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="./"><h1>💼 Consultora JB</h1></a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="./">Inicio</a></li>
+                    <li><a href="./#proyectos">Proyectos</a></li>
+                    <li><a href="./#contacto">Contacto</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Proyecto Detalle -->
+    <main class="proyecto-detalle">
+        <!-- Header del Proyecto -->
+        <section class="proyecto-header-detalle">
+            <div class="container">
+                <div class="proyecto-badge-detalle">E-Commerce Full-Stack</div>
+                <h1 class="proyecto-titulo-detalle">📚 BookHaven</h1>
+                <p class="proyecto-subtitulo-detalle">Plataforma de comercio electrónico full-stack especializada en la venta de libros, mangas, novelas gráficas y cómics. Desarrollada con Django REST Framework y React.</p>
+            </div>
+        </section>
+
+        <!-- Video Demo -->
+        <section class="video-section">
+            <div class="container">
+                <div class="video-wrapper">
+                    <video controls autoplay muted loop playsinline class="demo-video-full" poster="assets/img/screen1.png">
+                        <source src="assets/video/demo1.mp4" type="video/mp4">
+                        Tu navegador no soporta la reproducción de videos.
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <!-- Descripción General -->
+        <section class="descripcion-section">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-text">
+                        <h2 class="section-heading">📋 Descripción General</h2>
+                        <p><strong>BookHaven</strong> es una plataforma de comercio electrónico full-stack especializada en la venta de libros, mangas, novelas gráficas y cómics. Desarrollada con <strong>Django REST Framework</strong> en el backend y <strong>React</strong> en el frontend, esta aplicación demuestra competencias profesionales en desarrollo web moderno, implementando autenticación JWT, gestión de estado avanzada, APIs RESTful y un diseño completamente responsive.</p>
+                        <p><strong>Stack Tecnológico Principal:</strong> Backend con Python, Django 5.2.8, Django REST Framework 3.16.1. Frontend con React 19.2.0, React Router DOM, React Query. Autenticación JWT, Base de datos SQLite, Estilos con Bootstrap 5.3.8, y HTTP Client con Axios.</p>
+                    </div>
+                    <div class="content-image">
+                        <img src="assets/img/screen1.png" alt="BookHaven - Vista General">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Página de Inicio -->
+        <section class="feature-section feature-right">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-image">
+                        <img src="assets/img/screen1.png" alt="Página de Inicio BookHaven">
+                    </div>
+                    <div class="content-text">
+                        <h2 class="section-heading">🏠 Página de Inicio</h2>
+                        <p>La página principal de BookHaven presenta una interfaz moderna y atractiva con un hero section impactante que invita a los usuarios a explorar el catálogo. Incluye una sección narrativa sobre la historia de la tienda y una galería de productos destacados con animaciones suaves al hacer hover.</p>
+                        <p><strong>Características técnicas:</strong> Hero section con llamada a la acción (CTA), Grid responsive de productos destacados, Animaciones CSS y transiciones suaves, Diseño mobile-first con Bootstrap 5. El diseño es completamente responsive, adaptándose perfectamente a dispositivos móviles, tablets y desktop.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Catálogo de Productos -->
+        <section class="feature-section feature-left">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-text">
+                        <h2 class="section-heading">📚 Catálogo de Productos con Filtros Avanzados</h2>
+                        <p>El catálogo de productos ofrece una experiencia de búsqueda y filtrado completa. Los usuarios pueden filtrar por categoría (Libros, Mangas, Novelas Gráficas, Cómics), rango de precios, y realizar búsquedas en tiempo real por nombre o autor.</p>
+                        <p><strong>Características técnicas:</strong> Filtros combinados (categoría, precio, búsqueda), Búsqueda en tiempo real con debouncing, Paginación del lado del servidor, Ordenamiento dinámico (precio, nombre, fecha), Gestión de estado con React Query para caché inteligente. La interfaz incluye paginación y ordenamiento dinámico, todo implementado con React Query para optimizar el rendimiento.</p>
+                    </div>
+                    <div class="content-image">
+                        <img src="assets/img/screen1.png" alt="Catálogo de Productos">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vista Detallada de Producto -->
+        <section class="feature-section feature-right">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-image">
+                        <img src="assets/img/screen1.png" alt="Vista Detallada de Producto">
+                    </div>
+                    <div class="content-text">
+                        <h2 class="section-heading">📖 Vista Detallada de Producto</h2>
+                        <p>Cada producto cuenta con una página de detalle completa que muestra la imagen principal, información del autor, descripción extendida y contraportada del libro. La interfaz permite añadir productos al carrito directamente, marcarlos como favoritos, y navegar fácilmente entre productos relacionados.</p>
+                        <p><strong>Características técnicas:</strong> Vista de imagen grande con zoom, Información estructurada (autor, precio, stock), Sección de contraportada expandible, Botones de acción (carrito, favoritos), Manejo de estados de carga y errores. El diseño está optimizado para mostrar toda la información de manera clara y organizada.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Carrito de Compras -->
+        <section class="feature-section feature-left">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-text">
+                        <h2 class="section-heading">🛒 Carrito de Compras Inteligente</h2>
+                        <p>El sistema de carrito de compras es una de las características más destacadas del proyecto. Funciona tanto para usuarios autenticados (persistencia en base de datos) como para invitados (almacenamiento en localStorage). Al autenticarse, el carrito del invitado se sincroniza automáticamente con el backend.</p>
+                        <p><strong>Características técnicas:</strong> Carrito dual (usuarios autenticados e invitados), Sincronización automática al autenticarse, Cálculo de totales en tiempo real, Validación de stock disponible, Persistencia en localStorage y base de datos. La interfaz muestra un resumen en tiempo real del total, permite modificar cantidades y eliminar productos con actualizaciones instantáneas.</p>
+                    </div>
+                    <div class="content-image">
+                        <img src="assets/img/screen1.png" alt="Carrito de Compras">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sistema de Autenticación JWT -->
+        <section class="feature-section feature-right">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-image">
+                        <img src="assets/img/screen1.png" alt="Sistema de Autenticación">
+                    </div>
+                    <div class="content-text">
+                        <h2 class="section-heading">🔐 Sistema de Autenticación JWT</h2>
+                        <p>El sistema de autenticación implementa JWT (JSON Web Tokens) de manera segura, con tokens de acceso y refresh. Las páginas de login y registro incluyen validación de formularios tanto en frontend como backend, con mensajes de error claros y feedback visual inmediato.</p>
+                        <p><strong>Características técnicas:</strong> Autenticación JWT con refresh tokens, Validación de formularios en tiempo real, Protección de rutas privadas, Manejo seguro de tokens en localStorage, Interceptors de Axios para añadir tokens automáticamente. Las rutas protegidas están implementadas con React Router, redirigiendo automáticamente a usuarios no autenticados.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Proceso de Checkout -->
+        <section class="feature-section feature-left">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-text">
+                        <h2 class="section-heading">💳 Proceso de Checkout y Historial de Compras</h2>
+                        <p>El proceso de checkout guía al usuario paso a paso para completar una compra, validando el stock disponible y registrando toda la transacción en la base de datos. El historial de compras muestra todas las transacciones realizadas por el usuario, con detalles completos de cada compra.</p>
+                        <p><strong>Características técnicas:</strong> Proceso de checkout completo, Validación de stock antes de comprar, Registro de compras en base de datos, Historial detallado con items y precios, Estados de compra gestionados. Cada compra puede tener diferentes estados (pendiente, completada, cancelada) e incluye items, precios individuales, subtotales y fechas.</p>
+                    </div>
+                    <div class="content-image">
+                        <img src="assets/img/screen1.png" alt="Checkout y Historial">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sistema de Favoritos -->
+        <section class="feature-section feature-right">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-image">
+                        <img src="assets/img/screen1.png" alt="Sistema de Favoritos">
+                    </div>
+                    <div class="content-text">
+                        <h2 class="section-heading">⭐ Sistema de Favoritos</h2>
+                        <p>Los usuarios pueden guardar productos como favoritos para acceso rápido posterior. El sistema de favoritos está integrado con el backend, permitiendo persistencia de datos y sincronización entre dispositivos cuando el usuario está autenticado.</p>
+                        <p><strong>Características técnicas:</strong> Persistencia de favoritos en base de datos, Sincronización entre sesiones, Interfaz intuitiva para gestionar favoritos, Integración con el sistema de productos. La interfaz muestra los favoritos de manera organizada con la misma calidad visual del catálogo principal.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Diseño Responsive -->
+        <section class="feature-section feature-left">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-text">
+                        <h2 class="section-heading">📱 Diseño Responsive y Mobile-First</h2>
+                        <p>BookHaven está diseñado con un enfoque mobile-first, asegurando una experiencia óptima en todos los dispositivos. El navbar se transforma en un menú hamburguesa en dispositivos móviles, los grids de productos se adaptan automáticamente, y todos los formularios son completamente funcionales en pantallas táctiles.</p>
+                        <p><strong>Características técnicas:</strong> Diseño mobile-first con Bootstrap 5, Breakpoints responsive (móvil, tablet, desktop), Menú hamburguesa para navegación móvil, Grid system flexible, Optimización de imágenes y carga. Las imágenes y textos se escalan apropiadamente manteniendo la legibilidad y usabilidad.</p>
+                    </div>
+                    <div class="content-image">
+                        <img src="assets/img/screen1.png" alt="Diseño Responsive">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interfaz de Usuario -->
+        <section class="feature-section feature-right">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-image">
+                        <img src="assets/img/screen1.png" alt="Interfaz de Usuario">
+                    </div>
+                    <div class="content-text">
+                        <h2 class="section-heading">🎨 Interfaz de Usuario y Experiencia</h2>
+                        <p>La interfaz de BookHaven combina una paleta de colores moderna con gradientes suaves en tonos azules y púrpuras, creando una experiencia visual atractiva y profesional. Las animaciones y transiciones están cuidadosamente implementadas para mejorar la experiencia del usuario sin comprometer el rendimiento.</p>
+                        <p><strong>Características técnicas:</strong> Paleta de colores profesional y moderna, Animaciones CSS optimizadas, Sistema de notificaciones toast, Loading states para todas las operaciones asíncronas, Error boundaries para manejo robusto de errores. El sistema de notificaciones toast proporciona feedback inmediato para todas las acciones del usuario.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Arquitectura Backend -->
+        <section class="feature-section feature-left">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-text">
+                        <h2 class="section-heading">🔧 Arquitectura Backend y API RESTful</h2>
+                        <p>El backend está construido con Django REST Framework siguiendo las mejores prácticas de diseño de APIs REST. Incluye serializers personalizados para validación de datos, permisos granulares por endpoint, y un sistema de autenticación robusto.</p>
+                        <p><strong>Características técnicas:</strong> Arquitectura RESTful bien estructurada, Serializers DRF para validación, Permisos y autenticación por endpoint, CORS configurado para frontend, Manejo de errores robusto y consistente. La API está completamente documentada y sigue convenciones REST estándar, facilitando la integración y el mantenimiento.</p>
+                    </div>
+                    <div class="content-image">
+                        <img src="assets/img/screen1.png" alt="Arquitectura Backend">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Funcionalidades Destacadas -->
+        <section class="funcionalidades-detalle">
+            <div class="container">
+                <h2 class="section-heading-center">🚀 Funcionalidades Destacadas</h2>
+                <div class="funcionalidad-grid-detalle">
+                    <div class="funcionalidad-card-detalle">
+                        <div class="funcionalidad-icon-detalle">🛒</div>
+                        <h3>Carrito Dual</h3>
+                        <p>Implementación de carrito para usuarios autenticados e invitados con sincronización automática al autenticarse.</p>
+                    </div>
+
+                    <div class="funcionalidad-card-detalle">
+                        <div class="funcionalidad-icon-detalle">🔐</div>
+                        <h3>Autenticación JWT</h3>
+                        <p>Manejo de tokens expirados y refresh automático con protección de rutas privadas.</p>
+                    </div>
+
+                    <div class="funcionalidad-card-detalle">
+                        <div class="funcionalidad-icon-detalle">🔍</div>
+                        <h3>Filtros Avanzados</h3>
+                        <p>Combinación de múltiples filtros con actualización en tiempo real y búsqueda con debouncing.</p>
+                    </div>
+
+                    <div class="funcionalidad-card-detalle">
+                        <div class="funcionalidad-icon-detalle">⚡</div>
+                        <h3>Optimización de Rendimiento</h3>
+                        <p>Uso de React Query para caché inteligente y reducción de re-renders innecesarios.</p>
+                    </div>
+
+                    <div class="funcionalidad-card-detalle">
+                        <div class="funcionalidad-icon-detalle">📱</div>
+                        <h3>Diseño Responsive</h3>
+                        <p>Mobile-first con Bootstrap 5, adaptándose perfectamente a todos los dispositivos.</p>
+                    </div>
+
+                    <div class="funcionalidad-card-detalle">
+                        <div class="funcionalidad-icon-detalle">🎨</div>
+                        <h3>UX/UI Moderna</h3>
+                        <p>Interfaz atractiva con animaciones, transiciones y sistema de notificaciones toast.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Métricas del Proyecto -->
+        <section class="conclusion-detalle">
+            <div class="container">
+                <div class="conclusion-content">
+                    <h2 class="section-heading-center">📊 Métricas del Proyecto</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 2rem; text-align: center;">
+                        <div>
+                            <h3 style="font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 0.5rem;">5,000+</h3>
+                            <p>Líneas de Código</p>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 0.5rem;">15+</h3>
+                            <p>Componentes React</p>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 0.5rem;">12</h3>
+                            <p>Páginas Principales</p>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 0.5rem;">20+</h3>
+                            <p>Endpoints API</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Botón Volver -->
+        <section class="back-section">
+            <div class="container">
+                <a href="./" class="btn-back">← Volver a Proyectos</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Consultora JB</h3>
+                    <p>Desarrollando soluciones tecnológicas innovadoras</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>Email: contacto@consultorajb.com</p>
+                    <p>Teléfono: +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Consultora JB. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+</body>
+
+</html>

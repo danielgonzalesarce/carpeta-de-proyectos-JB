@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PlataformaTesis - Plataforma SaaS/Marketplace para asesorías académicas">
+    <title>PlataformaTesis | Consultora JB</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="./"><h1>💼 Consultora JB</h1></a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="./">Inicio</a></li>
+                    <li><a href="./#proyectos">Proyectos</a></li>
+                    <li><a href="./#contacto">Contacto</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Proyecto Detalle -->
+    <main class="proyecto-detalle">
+        <!-- Header del Proyecto -->
+        <section class="proyecto-header-detalle">
+            <div class="container">
+                <div class="proyecto-badge-detalle">SaaS / Marketplace</div>
+                <h1 class="proyecto-titulo-detalle">💼 PlataformaTesis</h1>
+                <p class="proyecto-subtitulo-detalle">Plataforma SaaS/Marketplace profesional full-stack para conectar estudiantes con mentores expertos en asesorías académicas. Desarrollada con NestJS y React 19.</p>
+            </div>
+        </section>
+
+        <!-- Video Demo -->
+        <section class="video-section">
+            <div class="container">
+                <div class="video-wrapper">
+                    <video controls autoplay muted loop playsinline class="demo-video-full" poster="assets/img/screen2.png">
+                        <source src="assets/video/demo2.mp4" type="video/mp4">
+                        Tu navegador no soporta la reproducción de videos.
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <!-- Descripción General -->
+        <section class="descripcion-section">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-text">
+                        <h2 class="section-heading">📋 Descripción General</h2>
+                        <p><strong>PlataformaTesis</strong> es una plataforma SaaS/Marketplace profesional full-stack desarrollada para conectar estudiantes con mentores expertos en asesorías académicas. Desarrollada con <strong>NestJS</strong> en el backend y <strong>React 19</strong> en el frontend, esta aplicación demuestra competencias profesionales en desarrollo web moderno, implementando autenticación JWT, gestión de estado avanzada con React Query, APIs RESTful modulares, sistema de mensajería en tiempo real, y un diseño completamente responsive con animaciones fluidas.</p>
+                        <p><strong>Stack Tecnológico Principal:</strong> Backend con Node.js, NestJS, TypeScript, MongoDB, Mongoose. Frontend con React 19.2.0, TypeScript, Vite, React Router DOM, React Query. Autenticación JWT con Passport, Estilos con Tailwind CSS 3.x, Animaciones con Framer Motion, Validación con Zod (frontend) y class-validator (backend), Formularios con React Hook Form, y HTTP Client con Axios.</p>
+                    </div>
+                    <div class="content-image">
+                        <img src="assets/img/screen2.png" alt="PlataformaTesis - Vista General">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Página de Inicio -->
+        <section class="feature-section feature-right">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-image">
+                        <img src="assets/img/screen2.png" alt="Página de Inicio PlataformaTesis">
+                    </div>
+                    <div class="content-text">
+                        <h2 class="section-heading">🏠 Página de Inicio (Landing Page)</h2>
+                        <p>La landing page de PlataformaTesis presenta una interfaz moderna y profesional con un hero section impactante que destaca la propuesta de valor de la plataforma. Incluye estadísticas en tiempo real (número de mentores, estudiantes, y porcentaje de satisfacción) obtenidas directamente de la base de datos, una sección de características principales, testimonios de usuarios con reseñas reales, y llamadas a la acción claras para cada tipo de usuario.</p>
+                        <p><strong>Características técnicas:</strong> Hero section con animaciones Framer Motion, Estadísticas dinámicas desde API pública (`/public/stats`), Sección de testimonios con reseñas reales, Diseño completamente responsive con Tailwind CSS, Navegación fluida con React Router, Animaciones de entrada al hacer scroll (scroll-triggered animations). El diseño utiliza gradientes oscuros con acentos azules y púrpuras, creando una experiencia visual atractiva y profesional.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboards Personalizados -->
+        <section class="feature-section feature-left">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-text">
+                        <h2 class="section-heading">📊 Dashboards Personalizados por Rol</h2>
+                        <p>Cada rol (Estudiante, Mentor, Administrador) tiene un dashboard completamente personalizado con métricas relevantes, gráficos de progreso, y acceso rápido a funcionalidades clave. El dashboard de estudiantes muestra contratos activos, avances pendientes, próximas reuniones, y estado de pagos. El dashboard de mentores incluye contratos asignados, estudiantes activos, ganancias, y calendario de reuniones.</p>
+                        <p><strong>Características técnicas:</strong> Dashboards personalizados por rol con datos en tiempo real, Tarjetas de estadísticas con iconos y animaciones, Gráficos y visualizaciones de progreso, Caché inteligente con React Query (`staleTime` configurado), Actualización automática de datos sin recargar página, Diseño responsive con grid system de Tailwind. El dashboard de administradores proporciona una visión general del sistema con estadísticas globales, gestión de mentores, y control de solicitudes.</p>
+                    </div>
+                    <div class="content-image">
+                        <img src="assets/img/screen2.png" alt="Dashboards Personalizados">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sistema de Mensajería -->
+        <section class="feature-section feature-right">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-image">
+                        <img src="assets/img/screen2.png" alt="Sistema de Mensajería">
+                    </div>
+                    <div class="content-text">
+                        <h2 class="section-heading">💬 Sistema de Mensajería en Tiempo Real</h2>
+                        <p>El sistema de mensajería es una de las características más destacadas, implementando un diseño moderno similar a aplicaciones de mensajería contemporáneas. La interfaz muestra una lista de conversaciones con avatares generados automáticamente, timestamps inteligentes (hoy, ayer, fecha completa), contador de mensajes no leídos, y agrupación de mensajes por fecha.</p>
+                        <p><strong>Características técnicas:</strong> Diseño moderno tipo chat con agrupación de mensajes, Avatares generados automáticamente basados en nombres, Timestamps inteligentes con formato contextual, Contador de mensajes no leídos en tiempo real, Animaciones Framer Motion para transiciones suaves, Sincronización automática con backend MongoDB, Interfaz responsive optimizada para móviles. El diseño incluye animaciones suaves al cambiar de conversación, estados de carga, y una interfaz de entrada de mensajes optimizada.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solicitud de Asesoría y Marketplace -->
+        <section class="feature-section feature-left">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-text">
+                        <h2 class="section-heading">📝 Solicitud de Asesoría y Marketplace de Paquetes</h2>
+                        <p>Los estudiantes pueden crear solicitudes de asesoría completando un formulario detallado con información sobre su proyecto (título, área, carrera, tipo de tesis, resumen). El sistema presenta un marketplace de paquetes (Básico, Estándar, Premium) con diferentes niveles de servicio, límites de revisiones, reuniones incluidas, y precios.</p>
+                        <p><strong>Características técnicas:</strong> Formulario multi-paso con validación en tiempo real, Marketplace visual de paquetes con comparación, Validación con Zod schemas compartidos, Integración con React Hook Form para performance, Estados de carga y feedback visual inmediato, Diseño responsive con Tailwind CSS. La interfaz permite seleccionar un paquete durante la creación de la solicitud, con validación en tiempo real usando React Hook Form y Zod.</p>
+                    </div>
+                    <div class="content-image">
+                        <img src="assets/img/screen2.png" alt="Marketplace de Paquetes">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sistema de Contratos -->
+        <section class="feature-section feature-right">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-image">
+                        <img src="assets/img/screen2.png" alt="Sistema de Contratos">
+                    </div>
+                    <div class="content-text">
+                        <h2 class="section-heading">🤝 Sistema de Contratos y Matching</h2>
+                        <p>El sistema de contratos gestiona todo el ciclo de vida de una asesoría, desde la solicitud hasta la finalización. Los administradores pueden realizar matching manual entre estudiantes y mentores, asignando contratos basados en especialidades y disponibilidad. Cada contrato incluye información detallada del paquete seleccionado, límites de revisiones y reuniones, fechas importantes, y estado del proyecto.</p>
+                        <p><strong>Características técnicas:</strong> Sistema de matching manual con interfaz intuitiva, Gestión completa de contratos con estados múltiples, Seguimiento de límites (revisiones, reuniones) en tiempo real, Filtros y búsqueda avanzada, Visualización de progreso del contrato, Notificaciones de cambios de estado. La interfaz muestra contratos activos, completados, y cancelados, con filtros y búsqueda para facilitar la gestión.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sistema de Avances -->
+        <section class="feature-section feature-left">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-text">
+                        <h2 class="section-heading">📤 Sistema de Avances y Revisiones</h2>
+                        <p>Los estudiantes pueden subir avances de su trabajo (documentos, archivos) que son revisados por los mentores asignados. El sistema permite a los mentores dejar correcciones detalladas, comentarios, y marcar avances como aprobados o pendientes de cambios. La interfaz muestra un historial completo de avances con estados, fechas de subida, fechas de revisión, y comentarios.</p>
+                        <p><strong>Características técnicas:</strong> Sistema de carga de archivos con validación, Interfaz de revisión con comentarios y correcciones, Historial completo de avances y revisiones, Estados de aprobación/rechazo con feedback, Seguimiento de límites de revisiones por paquete, Diseño organizado con cards y timeline visual. Los estudiantes pueden ver el progreso de sus revisiones y recibir notificaciones cuando un mentor completa una revisión.</p>
+                    </div>
+                    <div class="content-image">
+                        <img src="assets/img/screen2.png" alt="Sistema de Avances">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calendario de Reuniones -->
+        <section class="feature-section feature-right">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-image">
+                        <img src="assets/img/screen2.png" alt="Calendario de Reuniones">
+                    </div>
+                    <div class="content-text">
+                        <h2 class="section-heading">📅 Calendario de Reuniones</h2>
+                        <p>El sistema de reuniones permite a estudiantes y mentores programar sesiones de seguimiento. Los estudiantes pueden solicitar reuniones dentro de los límites de su paquete, mientras que los mentores pueden aceptar, rechazar, o proponer nuevas fechas. La interfaz incluye un calendario visual que muestra todas las reuniones programadas, con información de fecha, hora, duración, y estado.</p>
+                        <p><strong>Características técnicas:</strong> Calendario interactivo con vista mensual/semanal, Solicitud y gestión de reuniones, Validación de límites de reuniones por paquete, Estados de reunión (pendiente, confirmada, completada, cancelada), Notificaciones de reuniones próximas, Integración con sistema de contratos. El sistema valida que no se excedan los límites del paquete y proporciona recordatorios de reuniones próximas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sistema de Reseñas -->
+        <section class="feature-section feature-left">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-text">
+                        <h2 class="section-heading">⭐ Sistema de Reseñas y Calificaciones</h2>
+                        <p>El sistema de reseñas permite a estudiantes y mentores dejar calificaciones y comentarios públicos sobre su experiencia. Implementa un flujo innovador de dos pasos: primero verificación por email (sin requerir login completo), luego formulario de reseña. Las reseñas se muestran en la landing page como testimonios y en una página dedicada tipo blog con paginación, filtros, y estadísticas generales.</p>
+                        <p><strong>Características técnicas:</strong> Flujo de verificación por email sin login completo, Formulario de reseña con validación (rating 1-5, comentarios), Página tipo blog con todas las reseñas publicadas, Estadísticas en tiempo real (promedio, satisfacción, total), Sistema de moderación (isPublished, isVerified), Diseño atractivo con cards y animaciones. El sistema calcula automáticamente el porcentaje de satisfacción y promedio de calificaciones, mostrándolos en tiempo real en la página principal.</p>
+                    </div>
+                    <div class="content-image">
+                        <img src="assets/img/screen2.png" alt="Sistema de Reseñas">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sistema de Pagos -->
+        <section class="feature-section feature-right">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-image">
+                        <img src="assets/img/screen2.png" alt="Sistema de Pagos">
+                    </div>
+                    <div class="content-text">
+                        <h2 class="section-heading">💳 Sistema de Pagos y Finanzas</h2>
+                        <p>El sistema de pagos gestiona todas las transacciones relacionadas con los contratos. Los estudiantes pueden ver su historial de pagos, estados de facturación, y métodos de pago. Los mentores tienen acceso a un dashboard de ganancias que muestra ingresos por contrato, comisiones, y liquidaciones. Los administradores pueden gestionar todas las transacciones, generar reportes financieros, y controlar el flujo de dinero en la plataforma.</p>
+                        <p><strong>Características técnicas:</strong> Historial completo de pagos con filtros, Dashboard de ganancias para mentores, Estados de pago (pendiente, completado, fallido, reembolsado), Cálculo automático de comisiones y liquidaciones, Reportes financieros para administradores, Integración con sistema de contratos. La interfaz muestra información detallada de cada pago con fechas, montos, estados, y referencias.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gestión de Perfiles -->
+        <section class="feature-section feature-left">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-text">
+                        <h2 class="section-heading">👥 Gestión de Perfiles y Usuarios</h2>
+                        <p>Cada tipo de usuario tiene un perfil personalizado con información relevante. Los estudiantes pueden completar su perfil académico (carrera, universidad, área de interés), los mentores pueden crear perfiles profesionales (especialidades, experiencia, tarifas), y los administradores gestionan la aprobación y suspensión de mentores. El sistema de perfiles incluye validación de datos, carga de imágenes, y actualización en tiempo real.</p>
+                        <p><strong>Características técnicas:</strong> Perfiles personalizados por rol con campos específicos, Validación de formularios con React Hook Form y Zod, Sistema de aprobación de mentores por administradores, Carga y gestión de imágenes de perfil, Actualización en tiempo real con React Query, Diseño responsive con Tailwind CSS. Los perfiles de mentores son revisados por administradores antes de ser activados.</p>
+                    </div>
+                    <div class="content-image">
+                        <img src="assets/img/screen2.png" alt="Gestión de Perfiles">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sistema de Autenticación -->
+        <section class="feature-section feature-right">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-image">
+                        <img src="assets/img/screen2.png" alt="Sistema de Autenticación">
+                    </div>
+                    <div class="content-text">
+                        <h2 class="section-heading">🔐 Sistema de Autenticación JWT</h2>
+                        <p>El sistema de autenticación implementa JWT (JSON Web Tokens) de manera segura, con tokens de acceso y refresh. Las páginas de login y registro incluyen validación de formularios tanto en frontend (Zod) como backend (class-validator), con mensajes de error claros y feedback visual inmediato. Las rutas protegidas están implementadas con React Router y guards de autenticación, redirigiendo automáticamente a usuarios no autenticados.</p>
+                        <p><strong>Características técnicas:</strong> Autenticación JWT con refresh tokens, Validación de formularios en tiempo real (frontend y backend), Protección de rutas privadas con guards, Manejo seguro de tokens en localStorage, Interceptors de Axios para añadir tokens automáticamente, Guards de roles en backend (NestJS Guards), Sistema de permisos granulares por endpoint. El sistema maneja roles (admin, mentor, student) con permisos granulares por endpoint.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Diseño Responsive -->
+        <section class="feature-section feature-left">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-text">
+                        <h2 class="section-heading">📱 Diseño Responsive y Mobile-First</h2>
+                        <p>PlataformaTesis está diseñado con un enfoque mobile-first, asegurando una experiencia óptima en todos los dispositivos. El sidebar del dashboard se transforma en un menú hamburguesa en dispositivos móviles, los grids de datos se adaptan automáticamente, y todos los formularios son completamente funcionales en pantallas táctiles.</p>
+                        <p><strong>Características técnicas:</strong> Diseño mobile-first con Tailwind CSS, Breakpoints responsive (sm, md, lg, xl, 2xl), Sidebar colapsable con menú hamburguesa, Grid system flexible que se adapta al tamaño de pantalla, Optimización de animaciones para móviles, Touch-friendly interfaces con áreas de toque adecuadas. Las animaciones están optimizadas para no comprometer el rendimiento en dispositivos móviles, y las imágenes y textos se escalan apropiadamente manteniendo la legibilidad y usabilidad.</p>
+                    </div>
+                    <div class="content-image">
+                        <img src="assets/img/screen2.png" alt="Diseño Responsive">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interfaz de Usuario -->
+        <section class="feature-section feature-right">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-image">
+                        <img src="assets/img/screen2.png" alt="Interfaz de Usuario">
+                    </div>
+                    <div class="content-text">
+                        <h2 class="section-heading">🎨 Interfaz de Usuario y Experiencia</h2>
+                        <p>La interfaz de PlataformaTesis combina una paleta de colores moderna con gradientes suaves en tonos oscuros (slate, gray) con acentos azules y púrpuras, creando una experiencia visual atractiva y profesional. Las animaciones y transiciones están cuidadosamente implementadas con Framer Motion para mejorar la experiencia del usuario sin comprometer el rendimiento.</p>
+                        <p><strong>Características técnicas:</strong> Paleta de colores profesional con tema oscuro, Animaciones Framer Motion optimizadas, Estados de carga (skeletons, spinners) para UX mejorada, Error boundaries para manejo robusto de errores, Transiciones suaves entre páginas, Iconos Lucide React consistentes en toda la aplicación, Efectos hover y focus states bien definidos. El sistema incluye estados de carga para todas las operaciones asíncronas, manejo robusto de errores con mensajes claros, y feedback visual inmediato para todas las acciones del usuario.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Arquitectura Backend -->
+        <section class="feature-section feature-left">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-text">
+                        <h2 class="section-heading">🔧 Arquitectura Backend y API RESTful</h2>
+                        <p>El backend está construido con NestJS siguiendo las mejores prácticas de diseño de APIs REST. La arquitectura es completamente modular, con cada funcionalidad organizada en su propio módulo (auth, users, mentors, students, contracts, packages, service-requests, advances, meetings, messages, reviews). Cada módulo incluye controladores con decoradores REST, servicios con lógica de negocio, DTOs con validación automática, y esquemas de Mongoose.</p>
+                        <p><strong>Características técnicas:</strong> Arquitectura modular con NestJS, APIs RESTful bien estructuradas, DTOs con class-validator para validación automática, Guards y decoradores para autenticación y autorización, Inyección de dependencias nativa de NestJS, CORS configurado para frontend, Manejo de errores centralizado y consistente, Separación clara de responsabilidades (controllers, services, schemas). La API está completamente documentada, sigue convenciones REST estándar, e incluye manejo de errores robusto y consistente.</p>
+                    </div>
+                    <div class="content-image">
+                        <img src="assets/img/screen2.png" alt="Arquitectura Backend">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Páginas Públicas -->
+        <section class="feature-section feature-right">
+            <div class="container">
+                <div class="content-block">
+                    <div class="content-image">
+                        <img src="assets/img/screen2.png" alt="Páginas Públicas">
+                    </div>
+                    <div class="content-text">
+                        <h2 class="section-heading">📚 Páginas Públicas y Contenido Legal</h2>
+                        <p>La plataforma incluye un conjunto completo de páginas públicas y legales: Sobre Nosotros, Centro de Ayuda, Documentación, Blog, Casos de Éxito, Términos y Condiciones, Política de Privacidad, Política de Cookies, y Aviso Legal. Todas estas páginas utilizan el `MainLayout` compartido con header y footer profesionales, manteniendo consistencia visual en toda la aplicación.</p>
+                        <p><strong>Características técnicas:</strong> Sistema de layouts compartidos (MainLayout, DashboardLayout), Páginas legales completas y profesionales, Header con navegación, búsqueda, y autenticación, Footer con información de empresa y enlaces legales, Diseño consistente en todas las páginas públicas, SEO-friendly con estructura semántica HTML. El header incluye navegación principal, barra de búsqueda, y enlaces a secciones importantes, mientras que el footer contiene información de la empresa, enlaces legales, redes sociales, y formulario de newsletter.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Funcionalidades Destacadas -->
+        <section class="funcionalidades-detalle">
+            <div class="container">
+                <h2 class="section-heading-center">🚀 Funcionalidades Destacadas</h2>
+                <div class="funcionalidad-grid-detalle">
+                    <div class="funcionalidad-card-detalle">
+                        <div class="funcionalidad-icon-detalle">💬</div>
+                        <h3>Sistema de Mensajería Dual</h3>
+                        <p>Implementación de chat moderno con agrupación de mensajes, avatares generados, y timestamps inteligentes con sincronización en tiempo real.</p>
+                    </div>
+
+                    <div class="funcionalidad-card-detalle">
+                        <div class="funcionalidad-icon-detalle">🔐</div>
+                        <h3>Autenticación JWT Multi-Rol</h3>
+                        <p>Manejo de tokens expirados, refresh automático, y guards de roles en frontend y backend con permisos granulares por endpoint.</p>
+                    </div>
+
+                    <div class="funcionalidad-card-detalle">
+                        <div class="funcionalidad-icon-detalle">⭐</div>
+                        <h3>Reseñas sin Login Completo</h3>
+                        <p>Flujo innovador de verificación por email de dos pasos para permitir reseñas públicas con estadísticas en tiempo real.</p>
+                    </div>
+
+                    <div class="funcionalidad-card-detalle">
+                        <div class="funcionalidad-icon-detalle">⚡</div>
+                        <h3>Optimización de Rendimiento</h3>
+                        <p>Uso de React Query con `staleTime` y `refetchOnWindowFocus: false` para reducir llamadas innecesarias y mejorar la experiencia.</p>
+                    </div>
+
+                    <div class="funcionalidad-card-detalle">
+                        <div class="funcionalidad-icon-detalle">🤝</div>
+                        <h3>Sistema de Contratos Complejo</h3>
+                        <p>Gestión de límites por paquete, seguimiento de avances, y estados múltiples con matching manual entre estudiantes y mentores.</p>
+                    </div>
+
+                    <div class="funcionalidad-card-detalle">
+                        <div class="funcionalidad-icon-detalle">📊</div>
+                        <h3>Dashboards Personalizados</h3>
+                        <p>Tres dashboards completamente diferentes con métricas relevantes por rol (Admin, Mentor, Student) con datos en tiempo real.</p>
+                    </div>
+
+                    <div class="funcionalidad-card-detalle">
+                        <div class="funcionalidad-icon-detalle">🏗️</div>
+                        <h3>Arquitectura Modular</h3>
+                        <p>Backend organizado en módulos independientes con inyección de dependencias y separación clara de responsabilidades.</p>
+                    </div>
+
+                    <div class="funcionalidad-card-detalle">
+                        <div class="funcionalidad-icon-detalle">📱</div>
+                        <h3>Diseño Responsive</h3>
+                        <p>Mobile-first con Tailwind CSS, breakpoints optimizados, y animaciones optimizadas para todos los dispositivos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Métricas del Proyecto -->
+        <section class="conclusion-detalle">
+            <div class="container">
+                <div class="conclusion-content">
+                    <h2 class="section-heading-center">📊 Métricas del Proyecto</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 2rem; text-align: center;">
+                        <div>
+                            <h3 style="font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 0.5rem;">15,000+</h3>
+                            <p>Líneas de Código</p>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 0.5rem;">50+</h3>
+                            <p>Componentes React</p>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 0.5rem;">40+</h3>
+                            <p>Páginas Principales</p>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 0.5rem;">60+</h3>
+                            <p>Endpoints API</p>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 0.5rem;">10+</h3>
+                            <p>Modelos de Datos</p>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 0.5rem;">12+</h3>
+                            <p>Módulos Backend</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusión -->
+        <section class="conclusion-detalle">
+            <div class="container">
+                <div class="conclusion-content">
+                    <h2 class="section-heading-center">🎯 Conclusión</h2>
+                    <p>Este proyecto demuestra competencias profesionales en desarrollo web moderno full-stack, desde la arquitectura modular del backend con NestJS hasta la experiencia del usuario en el frontend con React 19. PlataformaTesis no es solo una aplicación funcional, sino una demostración completa de habilidades en tecnologías demandadas en la industria actual, siguiendo mejores prácticas y estándares profesionales.</p>
+                    <p style="margin-top: 1.5rem;"><strong>Tecnologías Destacadas:</strong> React 19 con TypeScript y Vite para desarrollo frontend ultrarrápido, NestJS con arquitectura modular para backend escalable, MongoDB con Mongoose para modelado de datos flexible, Tailwind CSS para diseño utility-first responsive, Framer Motion para animaciones profesionales, React Query para gestión de estado del servidor optimizada, y JWT con Passport para autenticación segura multi-rol.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Botón Volver -->
+        <section class="back-section">
+            <div class="container">
+                <a href="./" class="btn-back">← Volver a Proyectos</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Consultora JB</h3>
+                    <p>Desarrollando soluciones tecnológicas innovadoras</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>Email: contacto@consultorajb.com</p>
+                    <p>Teléfono: +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Consultora JB. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+</body>
+
+</html>

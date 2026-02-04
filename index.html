@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog de portafolio con demos de proyectos modernos - Consultora JB">
+    <title>Portafolio de Proyectos | Consultora JB</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="logo">
+                    <h1>💼 Consultora JB</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="#proyectos">Proyectos</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Portafolio de Proyectos</h1>
+                <p class="hero-subtitle">Explora nuestros proyectos más destacados con demos interactivos, información técnica y capturas de pantalla</p>
+                <a href="#proyectos" class="btn-primary">Ver Proyectos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proyectos Blog Grid -->
+    <section id="proyectos" class="proyectos-blog">
+        <div class="container">
+            <h2 class="section-title">Proyectos Destacados</h2>
+            
+            <div class="blog-grid">
+                <!-- Card Proyecto 1: PlataformaTesis -->
+                <article class="blog-card" data-project="plataforma-tesis">
+                    <div class="blog-card-image">
+                        <img src="assets/img/screen2.png" alt="PlataformaTesis">
+                        <div class="blog-card-overlay">
+                            <span class="blog-card-badge">SaaS / Marketplace</span>
+                        </div>
+                    </div>
+                    <div class="blog-card-content">
+                        <h3 class="blog-card-title">💼 PlataformaTesis</h3>
+                        <p class="blog-card-description">Plataforma SaaS/Marketplace profesional para conectar estudiantes con mentores expertos en asesorías académicas. Sistema completo con dashboards, mensajería en tiempo real y marketplace de paquetes.</p>
+                        <div class="blog-card-footer">
+                            <span class="blog-card-tag">React 19</span>
+                            <span class="blog-card-tag">NestJS</span>
+                            <span class="blog-card-tag">MongoDB</span>
+                            <a href="proyecto-plataforma-tesis.html" class="blog-card-link">Ver Detalles →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card Proyecto 2: BookHaven -->
+                <article class="blog-card" data-project="bookhaven">
+                    <div class="blog-card-image">
+                        <img src="assets/img/screen1.png" alt="BookHaven">
+                        <div class="blog-card-overlay">
+                            <span class="blog-card-badge">E-Commerce Full-Stack</span>
+                        </div>
+                    </div>
+                    <div class="blog-card-content">
+                        <h3 class="blog-card-title">📚 BookHaven</h3>
+                        <p class="blog-card-description">Plataforma de comercio electrónico full-stack especializada en libros, mangas, novelas gráficas y cómics. Desarrollada con Django REST Framework y React, con autenticación JWT y diseño responsive.</p>
+                        <div class="blog-card-footer">
+                            <span class="blog-card-tag">Django</span>
+                            <span class="blog-card-tag">React</span>
+                            <span class="blog-card-tag">JWT</span>
+                            <a href="proyecto-sistema-empresarial.html" class="blog-card-link">Ver Detalles →</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contacto" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Consultora JB</h3>
+                    <p>Desarrollando soluciones tecnológicas innovadoras</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>Email: contacto@consultorajb.com</p>
+                    <p>Teléfono: +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Consultora JB. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+</body>
+
+</html>

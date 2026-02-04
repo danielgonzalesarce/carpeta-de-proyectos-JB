@@ -1,0 +1,14 @@
+# Archivos de video grandes
+assets/video/*.mp4
+assets/video/*.mov
+assets/video/*.avi
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+*.log
+
+# Archivos temporales
+*.tmp
+*.temp
+
