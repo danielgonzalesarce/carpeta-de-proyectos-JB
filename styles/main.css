@@ -1326,6 +1326,10 @@ body {
         min-height: calc(100vh - 100px);
     }
     
+    .hero-content-wrapper {
+        padding-top: 4rem;
+    }
+    
     .proyecto-detalle {
         min-height: calc(100vh - 100px);
     }
