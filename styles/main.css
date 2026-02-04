@@ -887,15 +887,15 @@ body {
 
 .proyecto-header-detalle {
     position: relative;
-    min-height: 60vh;
+    min-height: 50vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 6rem 2rem 4rem;
-    padding-top: 6rem; /* El body ya tiene padding-top */
+    padding: 8rem 2rem 6rem;
     background: var(--bg-secondary);
     overflow: hidden;
     margin-top: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .proyecto-header-detalle::before {
@@ -956,9 +956,10 @@ body {
 }
 
 .video-section {
-    padding: 4rem 2rem;
+    padding: 6rem 2rem;
     background: var(--bg-primary);
     position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .video-section .container {
@@ -985,18 +986,21 @@ body {
 
 .descripcion-section,
 .feature-section {
-    padding: 6rem 2rem;
+    padding: 8rem 2rem;
     position: relative;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
 }
 
 .descripcion-section {
     background: var(--bg-secondary);
-    min-height: 400px; /* Asegurar altura mínima */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .feature-section {
     background: var(--bg-primary);
-    min-height: 400px; /* Asegurar altura mínima */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .feature-section.feature-right {
@@ -1016,8 +1020,9 @@ body {
 .content-block {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    gap: 5rem;
     align-items: center;
+    width: 100%;
 }
 
 .content-text {
@@ -1027,28 +1032,37 @@ body {
 
 .section-heading {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(2rem, 4vw, 3.5rem);
     font-weight: 700;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     line-height: 1.2;
     background: var(--gradient-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    letter-spacing: -0.02em;
 }
 
 .content-text p {
     color: var(--text-secondary);
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-    font-size: 1.0625rem;
+    line-height: 1.9;
+    margin-bottom: 1.75rem;
+    font-size: 1.125rem;
+}
+
+.content-text p strong {
+    color: var(--text-primary);
+    font-weight: 600;
 }
 
 .content-image {
     position: relative;
     border-radius: 24px;
     overflow: hidden;
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-xl), var(--glow-blue);
+    background: var(--bg-card);
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .content-image img {
@@ -1056,11 +1070,17 @@ body {
     height: auto;
     display: block;
     transition: var(--transition-slow);
-    border-radius: 24px;
+    border-radius: 16px;
+    object-fit: cover;
+}
+
+.content-image:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl), 0 0 40px rgba(18, 52, 152, 0.6);
 }
 
 .content-image:hover img {
-    transform: scale(1.05);
+    transform: scale(1.02);
 }
 
 /* Efectos adicionales para animaciones */
@@ -1104,9 +1124,11 @@ body {
    Funcionalidades Destacadas
    ============================================ */
 .funcionalidades-detalle {
-    padding: 6rem 2rem;
+    padding: 8rem 2rem;
     background: var(--bg-secondary);
     position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .funcionalidades-detalle .container {
