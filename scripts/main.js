@@ -815,6 +815,99 @@ function initDetailPageAnimations() {
     }
 }
 
+// ============================================
+// Dashboard Carousel - PlataformaTesis
+// ============================================
+function initDashboardCarousel() {
+    const carousel = document.querySelector('.dashboard-carousel');
+    if (!carousel) return;
+    
+    const slides = carousel.querySelectorAll('.carousel-slide');
+    const indicators = carousel.querySelectorAll('.indicator');
+    const prevBtn = carousel.querySelector('.carousel-prev');
+    const nextBtn = carousel.querySelector('.carousel-next');
+    
+    let currentSlide = 0;
+    let autoPlayInterval;
+    const autoPlayDelay = 4000; // 4 segundos
+    
+    function showSlide(index) {
+        // Remover clase active de todos los slides
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active', 'prev');
+            if (i < index) {
+                slide.classList.add('prev');
+            }
+        });
+        
+        // Agregar clase active al slide actual
+        slides[index].classList.add('active');
+        
+        // Actualizar indicadores
+        indicators.forEach((indicator, i) => {
+            indicator.classList.toggle('active', i === index);
+        });
+        
+        currentSlide = index;
+    }
+    
+    function nextSlide() {
+        const next = (currentSlide + 1) % slides.length;
+        showSlide(next);
+    }
+    
+    function prevSlide() {
+        const prev = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(prev);
+    }
+    
+    function startAutoPlay() {
+        autoPlayInterval = setInterval(nextSlide, autoPlayDelay);
+    }
+    
+    function stopAutoPlay() {
+        if (autoPlayInterval) {
+            clearInterval(autoPlayInterval);
+        }
+    }
+    
+    // Event listeners para botones
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            stopAutoPlay();
+            startAutoPlay();
+        });
+    }
+    
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            stopAutoPlay();
+            startAutoPlay();
+        });
+    }
+    
+    // Event listeners para indicadores
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            showSlide(index);
+            stopAutoPlay();
+            startAutoPlay();
+        });
+    });
+    
+    // Pausar autoplay al hacer hover
+    carousel.addEventListener('mouseenter', stopAutoPlay);
+    carousel.addEventListener('mouseleave', startAutoPlay);
+    
+    // Iniciar autoplay
+    startAutoPlay();
+    
+    // Inicializar primera slide
+    showSlide(0);
+}
+
 // Agregar animaciones de detalle a la función de inicialización
 function initAnimations() {
     initHeaderScroll();
@@ -824,4 +917,5 @@ function initAnimations() {
     initSmoothScroll();
     initMenuToggle();
     initDetailPageAnimations(); // Nueva función para páginas de detalle
+    initDashboardCarousel(); // Carrusel de dashboards
 }
