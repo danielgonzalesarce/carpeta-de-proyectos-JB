@@ -72,35 +72,6 @@ body {
     padding-top: 160px; /* Espacio para el header fijo con logo grande */
 }
 
-/* Cursor Personalizado */
-.cursor {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--primary-blue);
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 9999;
-    mix-blend-mode: difference;
-    transition: transform 0.1s ease;
-}
-
-.cursor-follower {
-    width: 40px;
-    height: 40px;
-    border: 2px solid var(--primary-blue);
-    border-radius: 50%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 9998;
-    mix-blend-mode: difference;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    opacity: 0.5;
-}
 
 /* Preloader */
 .preloader {

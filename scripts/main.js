@@ -54,60 +54,6 @@ function initPreloader() {
     });
 }
 
-// ============================================
-// Cursor Personalizado
-// ============================================
-function initCustomCursor() {
-    const cursor = document.querySelector('.cursor');
-    const cursorFollower = document.querySelector('.cursor-follower');
-    
-    if (!cursor || !cursorFollower) return;
-    
-    let mouseX = 0;
-    let mouseY = 0;
-    let followerX = 0;
-    let followerY = 0;
-    
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        
-        gsap.to(cursor, {
-            x: mouseX,
-            y: mouseY,
-            duration: 0.1,
-            ease: 'power2.out'
-        });
-    });
-    
-    // Animación suave del follower
-    function animateFollower() {
-        followerX += (mouseX - followerX) * 0.1;
-        followerY += (mouseY - followerY) * 0.1;
-        
-        gsap.set(cursorFollower, {
-            x: followerX,
-            y: followerY
-        });
-        
-        requestAnimationFrame(animateFollower);
-    }
-    animateFollower();
-    
-    // Efectos en hover
-    const hoverElements = document.querySelectorAll('a, button, .proyecto-card');
-    hoverElements.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            gsap.to(cursor, { scale: 1.5, duration: 0.3 });
-            gsap.to(cursorFollower, { scale: 1.5, opacity: 0.8, duration: 0.3 });
-        });
-        
-        el.addEventListener('mouseleave', () => {
-            gsap.to(cursor, { scale: 1, duration: 0.3 });
-            gsap.to(cursorFollower, { scale: 1, opacity: 0.5, duration: 0.3 });
-        });
-    });
-}
 
 // ============================================
 // Header Scroll Effect
@@ -412,7 +358,6 @@ function initMenuToggle() {
 // Inicializar todas las animaciones
 // ============================================
 function initAnimations() {
-    initCustomCursor();
     initHeaderScroll();
     initHeroAnimations();
     initProyectosAnimations();
@@ -872,7 +817,6 @@ function initDetailPageAnimations() {
 
 // Agregar animaciones de detalle a la función de inicialización
 function initAnimations() {
-    initCustomCursor();
     initHeaderScroll();
     initHeroAnimations();
     initProyectosAnimations();
