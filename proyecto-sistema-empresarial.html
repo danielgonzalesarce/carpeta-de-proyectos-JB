@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="BookHaven - Plataforma de comercio electrónico full-stack especializada en libros">
     <title>BookHaven | Consultora JB</title>
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/main.css?v=8.3">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -21,7 +21,7 @@
     <div class="preloader">
         <div class="preloader-content">
             <div class="preloader-logo">
-                <img src="assets/img/Logos.JB.png" alt="JB">
+                <img src="assets/img/logo.png" alt="JB">
             </div>
             <div class="preloader-progress">
                 <div class="preloader-bar"></div>
@@ -36,7 +36,7 @@
             <div class="nav-container">
                 <div class="logo">
                     <a href="index.html" class="logo-link">
-                        <img src="assets/img/Logos.JB.png" alt="Consultora JB" class="logo-img">
+                        <img src="assets/img/logo.png" alt="Consultora JB" class="logo-img">
                     </a>
                 </div>
                 <ul class="nav-links">
@@ -308,22 +308,22 @@
             <div class="container">
                 <div class="conclusion-content">
                     <h2 class="section-heading-center">📊 Métricas del Proyecto</h2>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 2rem; text-align: center;">
-                        <div>
-                            <h3 style="font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 0.5rem;">5,000+</h3>
-                            <p>Líneas de Código</p>
+                    <div class="metricas-grid">
+                        <div class="metrica-card">
+                            <h3 class="metrica-numero">5,000+</h3>
+                            <p class="metrica-label">Líneas de Código</p>
                         </div>
-                        <div>
-                            <h3 style="font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 0.5rem;">15+</h3>
-                            <p>Componentes React</p>
+                        <div class="metrica-card">
+                            <h3 class="metrica-numero">15+</h3>
+                            <p class="metrica-label">Componentes React</p>
                         </div>
-                        <div>
-                            <h3 style="font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 0.5rem;">12</h3>
-                            <p>Páginas Principales</p>
+                        <div class="metrica-card">
+                            <h3 class="metrica-numero">12</h3>
+                            <p class="metrica-label">Páginas Principales</p>
                         </div>
-                        <div>
-                            <h3 style="font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 0.5rem;">20+</h3>
-                            <p>Endpoints API</p>
+                        <div class="metrica-card">
+                            <h3 class="metrica-numero">20+</h3>
+                            <p class="metrica-label">Endpoints API</p>
                         </div>
                     </div>
                 </div>
@@ -348,7 +348,9 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Consultora de Asesoría Empresarial JB</h3>
+                    <div class="footer-logo">
+                        <img src="assets/img/logo.png" alt="Consultora de Asesoría Empresarial JB" class="footer-logo-img">
+                    </div>
                     <p>Soluciones empresariales integrales basadas en compromiso, innovación y excelencia. Transformamos negocios con estrategias personalizadas.</p>
                 </div>
                 <div class="footer-section">

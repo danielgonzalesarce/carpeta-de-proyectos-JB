@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="PlataformaTesis - Plataforma SaaS/Marketplace para asesorías académicas">
     <title>PlataformaTesis | Consultora JB</title>
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/main.css?v=8.3">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -21,7 +21,7 @@
     <div class="preloader">
         <div class="preloader-content">
             <div class="preloader-logo">
-                <img src="assets/img/Logos.JB.png" alt="JB">
+                <img src="assets/img/logo.png" alt="JB">
             </div>
             <div class="preloader-progress">
                 <div class="preloader-bar"></div>
@@ -36,7 +36,7 @@
             <div class="nav-container">
                 <div class="logo">
                     <a href="index.html" class="logo-link">
-                        <img src="assets/img/Logos.JB.png" alt="Consultora JB" class="logo-img">
+                        <img src="assets/img/logo.png" alt="Consultora JB" class="logo-img">
                     </a>
                 </div>
                 <ul class="nav-links">
@@ -322,14 +322,11 @@
         </section>
 
         <!-- Interfaz de Usuario -->
-        <section class="feature-section feature-right">
+        <section class="feature-section feature-centered">
             <div class="container">
-                <div class="content-block">
-                    <div class="content-image">
-                        <img src="assets/img/plataformatesis-interfaz-usuario.png" alt="Interfaz de Usuario">
-                    </div>
-                    <div class="content-text">
-                        <h2 class="section-heading">🎨 Interfaz de Usuario y Experiencia</h2>
+                <div class="content-block-centered">
+                    <div class="content-text-centered">
+                        <h2 class="section-heading-center">🎨 Interfaz de Usuario y Experiencia</h2>
                         <p>La interfaz de PlataformaTesis combina una paleta de colores moderna con gradientes suaves en tonos oscuros (slate, gray) con acentos azules y púrpuras, creando una experiencia visual atractiva y profesional. Las animaciones y transiciones están cuidadosamente implementadas con Framer Motion para mejorar la experiencia del usuario sin comprometer el rendimiento.</p>
                         <p><strong>Características técnicas:</strong> Paleta de colores profesional con tema oscuro, Animaciones Framer Motion optimizadas, Estados de carga (skeletons, spinners) para UX mejorada, Error boundaries para manejo robusto de errores, Transiciones suaves entre páginas, Iconos Lucide React consistentes en toda la aplicación, Efectos hover y focus states bien definidos. El sistema incluye estados de carga para todas las operaciones asíncronas, manejo robusto de errores con mensajes claros, y feedback visual inmediato para todas las acciones del usuario.</p>
                     </div>
@@ -338,30 +335,24 @@
         </section>
 
         <!-- Arquitectura Backend -->
-        <section class="feature-section feature-left">
+        <section class="feature-section feature-centered">
             <div class="container">
-                <div class="content-block">
-                    <div class="content-text">
-                        <h2 class="section-heading">🔧 Arquitectura Backend y API RESTful</h2>
+                <div class="content-block-centered">
+                    <div class="content-text-centered">
+                        <h2 class="section-heading-center">🔧 Arquitectura Backend y API RESTful</h2>
                         <p>El backend está construido con NestJS siguiendo las mejores prácticas de diseño de APIs REST. La arquitectura es completamente modular, con cada funcionalidad organizada en su propio módulo (auth, users, mentors, students, contracts, packages, service-requests, advances, meetings, messages, reviews). Cada módulo incluye controladores con decoradores REST, servicios con lógica de negocio, DTOs con validación automática, y esquemas de Mongoose.</p>
                         <p><strong>Características técnicas:</strong> Arquitectura modular con NestJS, APIs RESTful bien estructuradas, DTOs con class-validator para validación automática, Guards y decoradores para autenticación y autorización, Inyección de dependencias nativa de NestJS, CORS configurado para frontend, Manejo de errores centralizado y consistente, Separación clara de responsabilidades (controllers, services, schemas). La API está completamente documentada, sigue convenciones REST estándar, e incluye manejo de errores robusto y consistente.</p>
-                    </div>
-                    <div class="content-image">
-                        <img src="assets/img/plataformatesis-arquitectura-backend.png" alt="Arquitectura Backend">
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Páginas Públicas -->
-        <section class="feature-section feature-right">
+        <section class="feature-section feature-centered">
             <div class="container">
-                <div class="content-block">
-                    <div class="content-image">
-                        <img src="assets/img/plataformatesis-paginas-publicas.png" alt="Páginas Públicas">
-                    </div>
-                    <div class="content-text">
-                        <h2 class="section-heading">📚 Páginas Públicas y Contenido Legal</h2>
+                <div class="content-block-centered">
+                    <div class="content-text-centered">
+                        <h2 class="section-heading-center">📚 Páginas Públicas y Contenido Legal</h2>
                         <p>La plataforma incluye un conjunto completo de páginas públicas y legales: Sobre Nosotros, Centro de Ayuda, Documentación, Blog, Casos de Éxito, Términos y Condiciones, Política de Privacidad, Política de Cookies, y Aviso Legal. Todas estas páginas utilizan el `MainLayout` compartido con header y footer profesionales, manteniendo consistencia visual en toda la aplicación.</p>
                         <p><strong>Características técnicas:</strong> Sistema de layouts compartidos (MainLayout, DashboardLayout), Páginas legales completas y profesionales, Header con navegación, búsqueda, y autenticación, Footer con información de empresa y enlaces legales, Diseño consistente en todas las páginas públicas, SEO-friendly con estructura semántica HTML. El header incluye navegación principal, barra de búsqueda, y enlaces a secciones importantes, mientras que el footer contiene información de la empresa, enlaces legales, redes sociales, y formulario de newsletter.</p>
                     </div>
@@ -430,30 +421,30 @@
             <div class="container">
                 <div class="conclusion-content">
                     <h2 class="section-heading-center">📊 Métricas del Proyecto</h2>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 2rem; text-align: center;">
-                        <div>
-                            <h3 style="font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 0.5rem;">15,000+</h3>
-                            <p>Líneas de Código</p>
+                    <div class="metricas-grid">
+                        <div class="metrica-card">
+                            <h3 class="metrica-numero">15,000+</h3>
+                            <p class="metrica-label">Líneas de Código</p>
                         </div>
-                        <div>
-                            <h3 style="font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 0.5rem;">50+</h3>
-                            <p>Componentes React</p>
+                        <div class="metrica-card">
+                            <h3 class="metrica-numero">50+</h3>
+                            <p class="metrica-label">Componentes React</p>
                         </div>
-                        <div>
-                            <h3 style="font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 0.5rem;">40+</h3>
-                            <p>Páginas Principales</p>
+                        <div class="metrica-card">
+                            <h3 class="metrica-numero">40+</h3>
+                            <p class="metrica-label">Páginas Principales</p>
                         </div>
-                        <div>
-                            <h3 style="font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 0.5rem;">60+</h3>
-                            <p>Endpoints API</p>
+                        <div class="metrica-card">
+                            <h3 class="metrica-numero">60+</h3>
+                            <p class="metrica-label">Endpoints API</p>
                         </div>
-                        <div>
-                            <h3 style="font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 0.5rem;">10+</h3>
-                            <p>Modelos de Datos</p>
+                        <div class="metrica-card">
+                            <h3 class="metrica-numero">10+</h3>
+                            <p class="metrica-label">Modelos de Datos</p>
                         </div>
-                        <div>
-                            <h3 style="font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 0.5rem;">12+</h3>
-                            <p>Módulos Backend</p>
+                        <div class="metrica-card">
+                            <h3 class="metrica-numero">12+</h3>
+                            <p class="metrica-label">Módulos Backend</p>
                         </div>
                     </div>
                 </div>
@@ -489,7 +480,9 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Consultora de Asesoría Empresarial JB</h3>
+                    <div class="footer-logo">
+                        <img src="assets/img/logo.png" alt="Consultora de Asesoría Empresarial JB" class="footer-logo-img">
+                    </div>
                     <p>Soluciones empresariales integrales basadas en compromiso, innovación y excelencia. Transformamos negocios con estrategias personalizadas.</p>
                 </div>
                 <div class="footer-section">
