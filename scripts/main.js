@@ -61,8 +61,24 @@ function initPreloader() {
 function initHeaderScroll() {
     const header = document.querySelector('.header');
     
+    // Agregar clase scrolled cuando se hace scroll
+    const handleScroll = () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    };
+    
+    // Verificar estado inicial
+    handleScroll();
+    
+    // Escuchar eventos de scroll
+    window.addEventListener('scroll', handleScroll);
+    
+    // También usar ScrollTrigger como respaldo
     ScrollTrigger.create({
-        start: 'top -100',
+        start: 'top -50',
         end: 99999,
         toggleClass: { className: 'scrolled', targets: header }
     });
@@ -367,11 +383,158 @@ function initAnimations() {
 }
 
 // ============================================
+// Sistema de Proyectos — Arquitectura limpia (Repository → Service → View → Controller)
+// - Desacoplado, escalable y fácil de testear
+// ============================================
+const PortEventBus = (function() {
+    const events = {};
+    return {
+        on(name, fn) { (events[name] = events[name] || []).push(fn); },
+        off(name, fn) { if (!events[name]) return; events[name] = events[name].filter(f => f !== fn); },
+        emit(name, data) { (events[name] || []).forEach(fn => fn(data)); }
+    };
+})();
+
+class ProjectRepository {
+    constructor(initial = []) { this.projects = Array.isArray(initial) ? [...initial] : []; }
+    getAll() { return [...this.projects]; }
+    getByCategory(category) {
+        if (!category || category === 'all') return this.getAll();
+        return this.projects.filter(p => p.category === category);
+    }
+    getCategories() { return Array.from(new Set(this.projects.map(p => p.category))); }
+    add(project) { this.projects.push(project); }
+}
+
+class ProjectService {
+    constructor(repo) { this.repo = repo; }
+    list(category = 'all') { return this.repo.getByCategory(category); }
+    categories() { return this.repo.getCategories(); }
+}
+
+class ProjectView {
+    constructor(containerSelector, templateId, noResultsSelector) {
+        this.container = document.querySelector(containerSelector);
+        this.template = document.getElementById(templateId);
+        this.noResults = document.querySelector(noResultsSelector);
+    }
+    renderList(projects) {
+        if (!this.container) return;
+        this.container.innerHTML = '';
+        if (!projects || projects.length === 0) {
+            if (this.noResults) this.noResults.hidden = false;
+            PortEventBus.emit('projectsRendered');
+            return;
+        }
+        if (this.noResults) this.noResults.hidden = true;
+        const frag = document.createDocumentFragment();
+        projects.forEach(p => {
+            const node = this.template.content.firstElementChild.cloneNode(true);
+            node.setAttribute('data-project', p.id);
+            node.setAttribute('data-category', p.category);
+
+            const img = node.querySelector('.card-img');
+            if (img) { img.src = p.image || ''; img.alt = p.title || ''; }
+
+            const badge = node.querySelector('.card-badge'); if (badge) badge.textContent = p.badge || '';
+            const number = node.querySelector('.card-number'); if (number) number.textContent = p.number || '';
+            const title = node.querySelector('.card-title'); if (title) title.textContent = p.title || '';
+            const desc = node.querySelector('.card-description'); if (desc) desc.textContent = p.description || '';
+            const link = node.querySelector('.card-link'); if (link) link.href = p.url || '#';
+
+            const techStack = node.querySelector('.card-tech-stack');
+            if (techStack) techStack.innerHTML = (p.tech || []).map(t => `<span class="tech-tag">${t}</span>`).join('');
+
+            frag.appendChild(node);
+        });
+        this.container.appendChild(frag);
+        PortEventBus.emit('projectsRendered');
+    }
+    setActiveFilterBtn(category) {
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.category === category);
+        });
+    }
+}
+
+// Datos iniciales del portafolio (source of truth)
+const initialProjects = [
+    {
+        id: 'plataforma-tesis',
+        number: '01',
+        title: 'PlataformaTesis',
+        category: 'saas',
+        badge: 'SaaS / Marketplace',
+        tech: ['React 19','NestJS','MongoDB'],
+        description: 'Plataforma SaaS/Marketplace para conectar estudiantes con mentores expertos — dashboards, mensajería y marketplace.',
+        image: 'assets/img/plataformatesis-pagina-inicio.png',
+        url: 'proyecto-plataforma-tesis.html'
+    },
+    {
+        id: 'bookhaven',
+        number: '02',
+        title: 'BookHaven',
+        category: 'ecommerce',
+        badge: 'E-Commerce Full-Stack',
+        tech: ['Django','React','JWT'],
+        description: 'Plataforma de comercio electrónico especializada en libros con carrito, checkout y panel administrativo.',
+        image: 'assets/img/bookhaven-pagina-inicio.png',
+        url: 'proyecto-sistema-empresarial.html'
+    }
+];
+
+// Inicializar capa (repository → service → view → controller)
+const projectRepo = new ProjectRepository(initialProjects);
+const projectService = new ProjectService(projectRepo);
+const projectView = new ProjectView('.proyectos-container', 'projectCardTemplate', '.no-results');
+
+const ProjectController = {
+    init() {
+        // Register event to re-run animations after render (kills previous ScrollTriggers for safety)
+        PortEventBus.on('projectsRendered', () => {
+            // eliminar scroll triggers previos para evitar duplicados
+            if (window.ScrollTrigger && typeof ScrollTrigger.getAll === 'function') {
+                ScrollTrigger.getAll().forEach(t => t.kill());
+            }
+            // re-ejecutar animaciones para las cards renderizadas
+            initProyectosAnimations();
+            // re-aplicar smooth scroll a enlaces recién añadidos
+            initSmoothScroll();
+        });
+
+        // Attach filter buttons (progressive enhancement)
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const cat = btn.dataset.category;
+                projectView.setActiveFilterBtn(cat);
+                projectView.renderList(projectService.list(cat));
+                try { localStorage.setItem('portfolio:selectedCategory', cat); } catch (err) { /* ignore */ }
+            });
+        });
+
+        // Initial render (persist last selected category) — sanitize saved value
+        let saved = (function() { try { return localStorage.getItem('portfolio:selectedCategory'); } catch (err) { return null; } })() || 'all';
+        // If saved category has no projects (or the button was removed), fallback to 'all'
+        if (!projectService.list(saved).length) saved = 'all';
+        projectView.setActiveFilterBtn(saved);
+        projectView.renderList(projectService.list(saved));
+    },
+    // Helper to add new project at runtime (scalable)
+    addProject(project) {
+        projectRepo.add(project);
+        // refresh current view
+        const active = document.querySelector('.filter-btn.active')?.dataset.category || 'all';
+        projectView.renderList(projectService.list(active));
+    }
+};
+
+// ============================================
 // Inicializar cuando el DOM esté listo
 // ============================================
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initPreloader);
+    document.addEventListener('DOMContentLoaded', () => { ProjectController.init(); initPreloader(); });
 } else {
+    ProjectController.init();
     initPreloader();
 }
 

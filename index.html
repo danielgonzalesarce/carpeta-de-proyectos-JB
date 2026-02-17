@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portafolio ultra moderno de proyectos tecnológicos - Consultora JB">
     <title>Portafolio | Consultora JB</title>
-    <link rel="stylesheet" href="styles/main.css?v=8.3">
+    <link rel="stylesheet" href="styles/main.css?v=9.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
@@ -31,7 +31,7 @@
     </div>
 
     <!-- Header -->
-    <header class="header" id="header">
+    <header class="header header-transparent" id="header">
         <nav class="nav">
             <div class="nav-container">
                 <div class="logo">
@@ -102,72 +102,38 @@
             </p>
         </div>
 
-        <div class="proyectos-container">
-            <!-- Proyecto 1: PlataformaTesis -->
-            <article class="proyecto-card" data-project="plataforma-tesis">
-                <div class="proyecto-card-inner">
-                    <div class="proyecto-card-image">
-                        <div class="card-image-wrapper">
-                            <img src="assets/img/plataformatesis-pagina-inicio.png" alt="PlataformaTesis" class="card-img">
-                            <div class="card-overlay">
-                                <div class="card-overlay-content">
-                                    <span class="card-badge">SaaS / Marketplace</span>
-                                    <div class="card-tech-stack">
-                                        <span class="tech-tag">React 19</span>
-                                        <span class="tech-tag">NestJS</span>
-                                        <span class="tech-tag">MongoDB</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-gradient"></div>
-                    </div>
-                    <div class="proyecto-card-content">
-                        <div class="card-number">01</div>
-                        <h3 class="card-title">PlataformaTesis</h3>
-                        <p class="card-description">
-                            Plataforma SaaS/Marketplace profesional para conectar estudiantes con mentores expertos en asesorías académicas. Sistema completo con dashboards, mensajería en tiempo real y marketplace de paquetes.
-                        </p>
-                        <div class="card-footer">
-                            <a href="proyecto-plataforma-tesis.html" class="card-link">
-                                <span>Ver Detalles</span>
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                    <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-hover-effect"></div>
-            </article>
+        <div class="project-filters" role="tablist" aria-label="Filtros de proyectos">
+            <button class="filter-btn active" data-category="all">Todos</button>
+            <button class="filter-btn" data-category="saas">Aplicaciones SaaS</button>
+            <button class="filter-btn" data-category="ecommerce">Plataformas E-commerce</button>
+            <button class="filter-btn" data-category="auth">Sistemas de Autenticación</button>
+        </div>
 
-            <!-- Proyecto 2: BookHaven -->
-            <article class="proyecto-card" data-project="bookhaven">
+        <div class="proyectos-container" id="projectsGrid" aria-live="polite">
+            <!-- Los proyectos se renderizan desde `scripts/main.js` usando un repositorio desacoplado -->
+        </div>
+
+        <template id="projectCardTemplate">
+            <article class="proyecto-card">
                 <div class="proyecto-card-inner">
                     <div class="proyecto-card-image">
                         <div class="card-image-wrapper">
-                            <img src="assets/img/bookhaven-pagina-inicio.png" alt="BookHaven" class="card-img">
+                            <img class="card-img" src="" alt="" />
                             <div class="card-overlay">
                                 <div class="card-overlay-content">
-                                    <span class="card-badge">E-Commerce Full-Stack</span>
-                                    <div class="card-tech-stack">
-                                        <span class="tech-tag">Django</span>
-                                        <span class="tech-tag">React</span>
-                                        <span class="tech-tag">JWT</span>
-                                    </div>
+                                    <span class="card-badge"></span>
+                                    <div class="card-tech-stack"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-gradient"></div>
                     </div>
                     <div class="proyecto-card-content">
-                        <div class="card-number">02</div>
-                        <h3 class="card-title">BookHaven</h3>
-                        <p class="card-description">
-                            Plataforma de comercio electrónico full-stack especializada en libros, mangas, novelas gráficas y cómics. Desarrollada con Django REST Framework y React, con autenticación JWT y diseño responsive.
-                        </p>
+                        <div class="card-number"></div>
+                        <h3 class="card-title"></h3>
+                        <p class="card-description"></p>
                         <div class="card-footer">
-                            <a href="proyecto-sistema-empresarial.html" class="card-link">
+                            <a class="card-link" href="#">
                                 <span>Ver Detalles</span>
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                                     <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -178,6 +144,9 @@
                 </div>
                 <div class="card-hover-effect"></div>
             </article>
+        </template>
+
+        <div class="no-results" hidden>No hay proyectos en esta categoría.</div>
         </div>
     </section>
 
