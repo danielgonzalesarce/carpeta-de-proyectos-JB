@@ -283,6 +283,55 @@ body:not(.home-page) {
     background: transparent;
 }
 
+/* Header favorites */
+.favorites-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.favorites-link .favorites-count {
+    display: inline-flex;
+    min-width: 26px;
+    height: 26px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background: rgba(244,111,11,0.12);
+    color: var(--white);
+    font-weight: 800;
+    padding: 0 0.5rem;
+    font-size: 0.875rem;
+    border: 1px solid rgba(244,111,11,0.25);
+}
+
+/* Heart / favorite toggle on project cards */
+.favorite-toggle {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background: rgba(0,0,0,0.45);
+    border: 1px solid rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.9);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    z-index: 6;
+}
+
+.favorite-toggle svg { pointer-events: none; }
+
+.favorite-toggle:hover { transform: translateY(-2px); background: rgba(255,255,255,0.04); }
+
+.favorite-toggle.active { background: linear-gradient(135deg,#F46F0B,#FDB907); color: #fff; box-shadow: 0 6px 24px rgba(244,111,11,0.25); }
+
+.favorite-toggle.active svg path { stroke: #fff; fill: rgba(255,255,255,0.95); }
+
 .nav-link::after {
     content: '';
     position: absolute;
@@ -660,52 +709,6 @@ body:not(.home-page) {
     color: var(--white);
     box-shadow: 0 6px 30px rgba(18,52,152,0.12);
 }
-
-/* ============================================
-   CATEGORÍAS + FAVORITOS (UI)
-   ============================================ */
-.categorias-section {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 2rem var(--spacing-md);
-    text-align: center;
-}
-
-.categorias-grid {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 1rem;
-}
-
-.categoria-card {
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.04);
-    padding: 0.6rem 1rem;
-    border-radius: 12px;
-    min-width: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-    cursor: pointer;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-}
-
-.categoria-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-.categoria-card.active { box-shadow: var(--shadow-lg); transform: translateY(-6px); }
-
-.categoria-title { font-weight: 700; color: var(--white); font-family: 'Montserrat', sans-serif; font-size: 0.95rem; }
-.categoria-count { background: var(--primary-orange); color: #fff; padding: 0.25rem 0.6rem; border-radius: 9999px; font-weight: 700; font-size: 0.85rem; }
-.categoria-favorites { border-color: rgba(244,111,11,0.18); }
-
-/* FAVORITE BUTTON (card) */
-.favorite-btn { position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.02); border-radius: 9999px; border: none; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all var(--transition-fast); color: rgba(255,255,255,0.85); }
-.favorite-btn .icon-heart { width: 18px; height: 18px; stroke: rgba(255,255,255,0.8); fill: none; transition: fill 0.2s ease, transform 0.2s ease; }
-.favorite-btn.favorited { background: linear-gradient(90deg, rgba(244,111,11,0.12), rgba(18,52,152,0.04)); color: var(--primary-orange); }
-.favorite-btn.favorited .icon-heart { fill: var(--primary-orange); stroke: var(--primary-orange); transform: scale(1.05); }
 
 .proyecto-card {
     position: relative;

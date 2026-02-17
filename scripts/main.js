@@ -395,14 +395,30 @@ const PortEventBus = (function() {
     };
 })();
 
+// Favoritos — servicio pequeño para persistencia en localStorage
+const FavoritesService = {
+    key: 'portfolio:favorites',
+    _read() { try { return JSON.parse(localStorage.getItem(this.key) || '[]'); } catch (e) { return []; } },
+    _write(arr) { try { localStorage.setItem(this.key, JSON.stringify(Array.from(new Set(arr)))); } catch (e) { /* ignore */ } },
+    getAll() { return this._read(); },
+    isFavorite(id) { return this.getAll().includes(id); },
+    add(id) { const arr = new Set(this.getAll()); arr.add(id); this._write(Array.from(arr)); return true; },
+    remove(id) { const arr = new Set(this.getAll()); arr.delete(id); this._write(Array.from(arr)); return true; },
+    toggle(id) { if (this.isFavorite(id)) { this.remove(id); return false; } this.add(id); return true; },
+    count() { return this.getAll().length; },
+    clear() { try { localStorage.removeItem(this.key); } catch (e) { /* ignore */ } }
+};
+
+function updateHeaderFavoritesCount() {
+    const countEl = document.querySelector('.favorites-count');
+    const link = document.querySelector('.favorites-link');
+    const count = FavoritesService.count();
+    if (countEl) countEl.textContent = String(count);
+    if (link) link.classList.toggle('has-favorites', count > 0);
+}
+
 class ProjectRepository {
-    constructor(initial = []) {
-        this.projects = Array.isArray(initial) ? [...initial] : [];
-        // cargar favoritos desde localStorage
-        let stored = [];
-        try { stored = JSON.parse(localStorage.getItem('portfolio:favorites') || '[]'); if (!Array.isArray(stored)) stored = []; } catch (err) { stored = []; }
-        this.favorites = new Set(stored);
-    }
+    constructor(initial = []) { this.projects = Array.isArray(initial) ? [...initial] : []; }
     getAll() { return [...this.projects]; }
     getByCategory(category) {
         if (!category || category === 'all') return this.getAll();
@@ -410,25 +426,12 @@ class ProjectRepository {
     }
     getCategories() { return Array.from(new Set(this.projects.map(p => p.category))); }
     add(project) { this.projects.push(project); }
-
-    // Favoritos (persistidos)
-    isFavorite(id) { return this.favorites.has(id); }
-    toggleFavorite(id) {
-        if (!id) return false;
-        if (this.favorites.has(id)) this.favorites.delete(id); else this.favorites.add(id);
-        this._saveFavorites();
-        return this.isFavorite(id);
-    }
-    getFavorites() { return this.getAll().filter(p => this.isFavorite(p.id)); }
-    getFavoritesByCategory(category) { return category && category !== 'all' ? this.getFavorites().filter(p => p.category === category) : this.getFavorites(); }
-    _saveFavorites() { try { localStorage.setItem('portfolio:favorites', JSON.stringify(Array.from(this.favorites))); } catch (err) { /* ignore */ } }
 }
 
 class ProjectService {
     constructor(repo) { this.repo = repo; }
     list(category = 'all') { return this.repo.getByCategory(category); }
     categories() { return this.repo.getCategories(); }
-    favorites(category = 'all') { return this.repo.getFavoritesByCategory(category); }
 }
 
 class ProjectView {
@@ -464,13 +467,23 @@ class ProjectView {
             const techStack = node.querySelector('.card-tech-stack');
             if (techStack) techStack.innerHTML = (p.tech || []).map(t => `<span class="tech-tag">${t}</span>`).join('');
 
-            // estado de favorito
-            const favBtn = node.querySelector('.favorite-btn');
+            // Favorite toggle (progressive enhancement)
+            const favBtn = node.querySelector('.favorite-toggle');
             if (favBtn) {
-                favBtn.dataset.projectId = p.id;
-                const fav = projectRepo.isFavorite(p.id);
-                favBtn.setAttribute('aria-pressed', fav ? 'true' : 'false');
-                favBtn.classList.toggle('favorited', fav);
+                // store project id
+                favBtn.dataset.id = p.id;
+                const isFav = FavoritesService.isFavorite(p.id);
+                favBtn.classList.toggle('active', isFav);
+                favBtn.setAttribute('aria-pressed', isFav ? 'true' : 'false');
+
+                favBtn.addEventListener('click', (ev) => {
+                    ev.stopPropagation();
+                    const newState = FavoritesService.toggle(p.id);
+                    favBtn.classList.toggle('active', newState);
+                    favBtn.setAttribute('aria-pressed', newState ? 'true' : 'false');
+                    updateHeaderFavoritesCount();
+                    PortEventBus.emit('favoritesChanged', p.id);
+                });
             }
 
             frag.appendChild(node);
@@ -517,24 +530,25 @@ const projectService = new ProjectService(projectRepo);
 const projectView = new ProjectView('.proyectos-container', 'projectCardTemplate', '.no-results');
 
 const ProjectController = {
-    currentCategory: 'all',
     init() {
         // Register event to re-run animations after render (kills previous ScrollTriggers for safety)
         PortEventBus.on('projectsRendered', () => {
+            // eliminar scroll triggers previos para evitar duplicados
             if (window.ScrollTrigger && typeof ScrollTrigger.getAll === 'function') {
                 ScrollTrigger.getAll().forEach(t => t.kill());
             }
+            // re-ejecutar animaciones para las cards renderizadas
             initProyectosAnimations();
+            // re-aplicar smooth scroll a enlaces recién añadidos
             initSmoothScroll();
         });
 
-        // Attach filter buttons (progressive enhancement)
+        // Attach filter buttons (progressive enhancement) — con logging y manejo de errores
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 try {
                     if (e && typeof e.preventDefault === 'function') e.preventDefault();
                     const cat = btn.dataset.category;
-                    ProjectController.currentCategory = cat;
                     console.debug('[ProjectController] filter clicked →', cat);
 
                     const matched = projectService.list(cat);
@@ -546,79 +560,66 @@ const ProjectController = {
                     try { localStorage.setItem('portfolio:selectedCategory', cat); } catch (err) { /* ignore */ }
                 } catch (err) {
                     console.error('[ProjectController] error handling filter click', err);
+                    // mostrar mensaje al usuario (no-results) como fallback
                     const noResults = document.querySelector('.no-results');
                     if (noResults) noResults.hidden = false;
                 }
             });
         });
 
-        // Categorias section buttons
-        document.querySelectorAll('.categoria-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const cat = card.dataset.category;
-                ProjectController.currentCategory = cat;
-                if (cat === 'favorites') {
-                    projectView.setActiveFilterBtn('all');
-                    projectView.renderList(projectRepo.getFavorites());
-                } else {
-                    projectView.setActiveFilterBtn(cat);
-                    projectView.renderList(projectService.list(cat));
-                }
-            });
+        // Initial render (persist last selected category) — sanitize saved value
+        let saved = (function() { try { return localStorage.getItem('portfolio:selectedCategory'); } catch (err) { return null; } })() || 'all';
+        // If saved category has no projects (or the button was removed), fallback to 'all'
+        if (!projectService.list(saved).length) saved = 'all';
+        projectView.setActiveFilterBtn(saved);
+        projectView.renderList(projectService.list(saved));
+
+        // Actualizar contador de favoritos en header
+        try { updateHeaderFavoritesCount(); } catch (e) { /* ignore */ }
+
+        // Bind favorite buttons that exist in the static DOM (fallback cards)
+        document.querySelectorAll('.proyecto-card').forEach(card => {
+            const btn = card.querySelector('.favorite-toggle');
+            if (!btn) return;
+            // prevent double-binding
+            if (btn.dataset.bound) return;
+            btn.dataset.bound = '1';
+
+            const projectId = card.dataset.project || btn.dataset.id;
+            if (projectId) {
+                btn.classList.toggle('active', FavoritesService.isFavorite(projectId));
+                btn.setAttribute('aria-pressed', FavoritesService.isFavorite(projectId) ? 'true' : 'false');
+
+                btn.addEventListener('click', (ev) => {
+                    ev.stopPropagation();
+                    const newState = FavoritesService.toggle(projectId);
+                    btn.classList.toggle('active', newState);
+                    btn.setAttribute('aria-pressed', newState ? 'true' : 'false');
+                    updateHeaderFavoritesCount();
+                    PortEventBus.emit('favoritesChanged', projectId);
+                });
+            }
         });
 
-        // Favorite toggle (delegation)
-        if (projectView.container) {
-            projectView.container.addEventListener('click', (e) => {
-                const favBtn = e.target.closest('.favorite-btn');
-                if (!favBtn) return;
-                const projectEl = favBtn.closest('.proyecto-card');
-                const projectId = favBtn.dataset.projectId || projectEl?.dataset.project;
-                if (!projectId) return;
-                const newState = projectRepo.toggleFavorite(projectId);
-                favBtn.classList.toggle('favorited', newState);
-                favBtn.setAttribute('aria-pressed', String(newState));
-                PortEventBus.emit('favoritesChanged');
-                if (ProjectController.currentCategory === 'favorites') {
-                    projectView.renderList(projectRepo.getFavorites());
-                }
-            });
+        // Favoritos page: renderizar lista de favoritos si existe el contenedor
+        if (document.querySelector('.favoritos-container')) {
+            const favView = new ProjectView('.favoritos-container', 'projectCardTemplate', '.no-results-favorites');
+            const renderFavs = () => {
+                const favIds = FavoritesService.getAll();
+                const favProjects = projectRepo.getAll().filter(p => favIds.includes(p.id));
+                favView.renderList(favProjects);
+            };
+            renderFavs();
+            PortEventBus.on('favoritesChanged', renderFavs);
         }
-
-        // UI: actualizar contadores y estado de tarjetas
-        function updateCategoriesUI() {
-            document.querySelectorAll('.categoria-card').forEach(card => {
-                const cat = card.dataset.category;
-                const countEl = card.querySelector('.categoria-count');
-                if (!countEl) return;
-                if (cat === 'favorites') countEl.textContent = projectRepo.getFavorites().length;
-                else countEl.textContent = projectService.list(cat).length;
-                card.classList.toggle('active', ProjectController.currentCategory === cat);
-            });
-            const favCountEl = document.getElementById('favoritesCount');
-            if (favCountEl) favCountEl.textContent = projectRepo.getFavorites().length;
-        }
-
-        PortEventBus.on('projectsRendered', updateCategoriesUI);
-        PortEventBus.on('favoritesChanged', updateCategoriesUI);
-
-        // Initial render (persist last selected category) — sanitize
-        let saved = (function() { try { return localStorage.getItem('portfolio:selectedCategory'); } catch (err) { return null; } })() || 'all';
-        if (!projectService.list(saved).length && saved !== 'favorites') saved = 'all';
-        ProjectController.currentCategory = saved;
-        projectView.setActiveFilterBtn(saved !== 'favorites' ? saved : 'all');
-        projectView.renderList(saved === 'favorites' ? projectRepo.getFavorites() : projectService.list(saved));
-        updateCategoriesUI();
     },
-
+    // Helper to add new project at runtime (scalable)
     addProject(project) {
         projectRepo.add(project);
-        const active = ProjectController.currentCategory || 'all';
-        if (active === 'favorites') projectView.renderList(projectRepo.getFavorites());
-        else projectView.renderList(projectService.list(active));
-    },
-
-    toggleFavorite(id) { return projectRepo.toggleFavorite(id); }
+        // refresh current view
+        const active = document.querySelector('.filter-btn.active')?.dataset.category || 'all';
+        projectView.renderList(projectService.list(active));
+    }
 };
 
 // ============================================
