@@ -110,7 +110,68 @@
         </div>
 
         <div class="proyectos-container" id="projectsGrid" aria-live="polite">
-            <!-- Los proyectos se renderizan desde `scripts/main.js` usando un repositorio desacoplado -->
+            <!-- Fallback estático (server-side) — será reemplazado si JS se ejecuta correctamente -->
+            <!-- Proyecto 1: PlataformaTesis (fallback) -->
+            <article class="proyecto-card" data-project="plataforma-tesis">
+                <div class="proyecto-card-inner">
+                    <div class="proyecto-card-image">
+                        <div class="card-image-wrapper">
+                            <img src="assets/img/plataformatesis-pagina-inicio.png" alt="PlataformaTesis" class="card-img">
+                            <div class="card-overlay">
+                                <div class="card-overlay-content">
+                                    <span class="card-badge">SaaS / Marketplace</span>
+                                    <div class="card-tech-stack">
+                                        <span class="tech-tag">React 19</span>
+                                        <span class="tech-tag">NestJS</span>
+                                        <span class="tech-tag">MongoDB</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-gradient"></div>
+                    </div>
+                    <div class="proyecto-card-content">
+                        <div class="card-number">01</div>
+                        <h3 class="card-title">PlataformaTesis</h3>
+                        <p class="card-description">Plataforma SaaS/Marketplace profesional para conectar estudiantes con mentores expertos — dashboards, mensajería en tiempo real y marketplace de paquetes.</p>
+                        <div class="card-footer">
+                            <a href="proyecto-plataforma-tesis.html" class="card-link"><span>Ver Detalles</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-hover-effect"></div>
+            </article>
+
+            <!-- Proyecto 2: BookHaven (fallback) -->
+            <article class="proyecto-card" data-project="bookhaven">
+                <div class="proyecto-card-inner">
+                    <div class="proyecto-card-image">
+                        <div class="card-image-wrapper">
+                            <img src="assets/img/bookhaven-pagina-inicio.png" alt="BookHaven" class="card-img">
+                            <div class="card-overlay">
+                                <div class="card-overlay-content">
+                                    <span class="card-badge">E-Commerce Full-Stack</span>
+                                    <div class="card-tech-stack">
+                                        <span class="tech-tag">Django</span>
+                                        <span class="tech-tag">React</span>
+                                        <span class="tech-tag">JWT</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-gradient"></div>
+                    </div>
+                    <div class="proyecto-card-content">
+                        <div class="card-number">02</div>
+                        <h3 class="card-title">BookHaven</h3>
+                        <p class="card-description">Plataforma de comercio electrónico full-stack especializada en libros. Desarrollada con Django REST Framework y React.</p>
+                        <div class="card-footer">
+                            <a href="proyecto-sistema-empresarial.html" class="card-link"><span>Ver Detalles</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-hover-effect"></div>
+            </article>
         </div>
 
         <template id="projectCardTemplate">
