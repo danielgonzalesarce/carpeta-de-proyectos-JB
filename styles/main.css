@@ -631,6 +631,27 @@ body:not(.home-page) {
     text-align: center;
 }
 
+.favorites-actions {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.btn-clear-favorites {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.9rem;
+    border-radius: 9999px;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.92);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn-clear-favorites:hover { background: rgba(255,255,255,0.03); transform: translateY(-2px); }
+.btn-clear-favorites.disabled, .btn-clear-favorites[disabled] { opacity: 0.45; cursor: not-allowed; transform: none; }
+
 .section-number {
     font-family: 'Montserrat', sans-serif;
     font-size: 0.875rem;

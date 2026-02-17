@@ -604,11 +604,31 @@ const ProjectController = {
         // Favoritos page: renderizar lista de favoritos si existe el contenedor
         if (document.querySelector('.favoritos-container')) {
             const favView = new ProjectView('.favoritos-container', 'projectCardTemplate', '.no-results-favorites');
+            const clearBtn = document.getElementById('btnClearFavorites') || document.querySelector('.btn-clear-favorites');
+
             const renderFavs = () => {
                 const favIds = FavoritesService.getAll();
                 const favProjects = projectRepo.getAll().filter(p => favIds.includes(p.id));
                 favView.renderList(favProjects);
+                if (clearBtn) {
+                    const disabled = favProjects.length === 0;
+                    clearBtn.disabled = disabled;
+                    clearBtn.classList.toggle('disabled', disabled);
+                }
             };
+
+            if (clearBtn) {
+                clearBtn.addEventListener('click', () => {
+                    if (!FavoritesService.count()) return;
+                    const ok = window.confirm('¿Eliminar todos los favoritos? Esta acción no se puede deshacer.');
+                    if (!ok) return;
+                    FavoritesService.clear();
+                    updateHeaderFavoritesCount();
+                    renderFavs();
+                    PortEventBus.emit('favoritesChanged');
+                });
+            }
+
             renderFavs();
             PortEventBus.on('favoritesChanged', renderFavs);
         }
