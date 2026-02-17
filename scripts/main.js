@@ -502,13 +502,27 @@ const ProjectController = {
             initSmoothScroll();
         });
 
-        // Attach filter buttons (progressive enhancement)
+        // Attach filter buttons (progressive enhancement) — con logging y manejo de errores
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                const cat = btn.dataset.category;
-                projectView.setActiveFilterBtn(cat);
-                projectView.renderList(projectService.list(cat));
-                try { localStorage.setItem('portfolio:selectedCategory', cat); } catch (err) { /* ignore */ }
+                try {
+                    if (e && typeof e.preventDefault === 'function') e.preventDefault();
+                    const cat = btn.dataset.category;
+                    console.debug('[ProjectController] filter clicked →', cat);
+
+                    const matched = projectService.list(cat);
+                    console.debug('[ProjectController] matched projects:', matched.map(p => p.id));
+
+                    projectView.setActiveFilterBtn(cat);
+                    projectView.renderList(matched);
+
+                    try { localStorage.setItem('portfolio:selectedCategory', cat); } catch (err) { /* ignore */ }
+                } catch (err) {
+                    console.error('[ProjectController] error handling filter click', err);
+                    // mostrar mensaje al usuario (no-results) como fallback
+                    const noResults = document.querySelector('.no-results');
+                    if (noResults) noResults.hidden = false;
+                }
             });
         });
 
