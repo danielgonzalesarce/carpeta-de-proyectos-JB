@@ -328,7 +328,7 @@ body:not(.home-page) {
 
 .favorite-toggle:hover { transform: translateY(-2px); background: rgba(255,255,255,0.04); }
 
-.favorite-toggle.active { background: linear-gradient(135deg,#F46F0B,#FDB907); color: #fff; box-shadow: 0 6px 24px rgba(244,111,11,0.25); }
+.favorite-toggle.active { background: #E63946; color: #fff; box-shadow: 0 6px 24px rgba(230,57,70,0.35); }
 
 .favorite-toggle.active svg path { stroke: #fff; fill: rgba(255,255,255,0.95); }
 
