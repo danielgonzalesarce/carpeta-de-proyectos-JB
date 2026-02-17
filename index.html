@@ -89,6 +89,35 @@
         </div>
     </section>
 
+    <!-- Categorías Section -->
+    <section id="categorias" class="categorias-section">
+        <div class="section-header">
+            <h3 class="section-title-small">Categorías</h3>
+            <p class="section-description">Explora por categoría y marca tus proyectos favoritos ❤️</p>
+        </div>
+        <div class="categorias-grid">
+            <button type="button" class="categoria-card" data-category="saas">
+                <div class="categoria-title">Aplicaciones SaaS</div>
+                <div class="categoria-count" data-count-for="saas">0</div>
+            </button>
+
+            <button type="button" class="categoria-card" data-category="ecommerce">
+                <div class="categoria-title">Plataformas E-commerce</div>
+                <div class="categoria-count" data-count-for="ecommerce">0</div>
+            </button>
+
+            <button type="button" class="categoria-card" data-category="auth">
+                <div class="categoria-title">Sistemas de Autenticación</div>
+                <div class="categoria-count" data-count-for="auth">0</div>
+            </button>
+
+            <button type="button" class="categoria-card categoria-favorites" data-category="favorites" id="favoritesTile" aria-pressed="false">
+                <div class="categoria-title">Favoritos</div>
+                <div class="categoria-count" id="favoritesCount">0</div>
+            </button>
+        </div>
+    </section>
+
     <!-- Proyectos Section -->
     <section id="proyectos" class="proyectos-section">
         <div class="section-header">
@@ -117,6 +146,11 @@
                     <div class="proyecto-card-image">
                         <div class="card-image-wrapper">
                             <img src="assets/img/plataformatesis-pagina-inicio.png" alt="PlataformaTesis" class="card-img">
+                            <button type="button" class="favorite-btn" data-project-id="plataforma-tesis" aria-label="Marcar favorito" aria-pressed="false">
+                                <svg class="icon-heart" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8L12 22l8.8-9.6a5.5 5.5 0 0 0 0-7.8z"></path>
+                                </svg>
+                            </button>
                             <div class="card-overlay">
                                 <div class="card-overlay-content">
                                     <span class="card-badge">SaaS / Marketplace</span>
@@ -148,6 +182,11 @@
                     <div class="proyecto-card-image">
                         <div class="card-image-wrapper">
                             <img src="assets/img/bookhaven-pagina-inicio.png" alt="BookHaven" class="card-img">
+                            <button type="button" class="favorite-btn" data-project-id="bookhaven" aria-label="Marcar favorito" aria-pressed="false">
+                                <svg class="icon-heart" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8L12 22l8.8-9.6a5.5 5.5 0 0 0 0-7.8z"></path>
+                                </svg>
+                            </button>
                             <div class="card-overlay">
                                 <div class="card-overlay-content">
                                     <span class="card-badge">E-Commerce Full-Stack</span>
@@ -180,6 +219,11 @@
                     <div class="proyecto-card-image">
                         <div class="card-image-wrapper">
                             <img class="card-img" src="" alt="" />
+                            <button type="button" class="favorite-btn" aria-label="Marcar favorito" aria-pressed="false">
+                                <svg class="icon-heart" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8L12 22l8.8-9.6a5.5 5.5 0 0 0 0-7.8z"></path>
+                                </svg>
+                            </button>
                             <div class="card-overlay">
                                 <div class="card-overlay-content">
                                     <span class="card-badge"></span>
