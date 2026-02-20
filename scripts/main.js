@@ -205,13 +205,29 @@ function splitTextAnimation(element) {
 function initProyectosAnimations() {
     const cards = document.querySelectorAll('.proyecto-card');
     
+    // helper para desbloquear cualquier carta que por alguna razón
+    // siga con opacity 0 mientras está dentro del viewport
+    const revealVisibleCards = () => {
+        cards.forEach(card => {
+            const rect = card.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                const style = window.getComputedStyle(card);
+                if (parseFloat(style.opacity) === 0) {
+                    gsap.to(card, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' });
+                }
+            }
+        });
+    };
+
     cards.forEach((card, index) => {
         const cardInner = card.querySelector('.proyecto-card-inner');
         const cardImage = card.querySelector('.card-img');
         const cardContent = card.querySelector('.proyecto-card-content');
         const cardHoverEffect = card.querySelector('.card-hover-effect');
         
-        // Animación de entrada
+        // Animación de entrada (se aplica siempre, pero la helper anterior
+        // garantiza que el elemento no permanezca oculto si el trigger
+        // falló o el usuario se scrolleó rápidamente)
         gsap.from(card, {
             y: 100,
             opacity: 0,
@@ -283,6 +299,10 @@ function initProyectosAnimations() {
             }
         });
     });
+
+    // revelar inmediatamente cualquier carta ya visible y suscribirse a scroll
+    revealVisibleCards();
+    window.addEventListener('scroll', revealVisibleCards, { passive: true });
 }
 
 // ============================================
@@ -548,34 +568,58 @@ const ProjectController = {
             btn.addEventListener('click', (e) => {
                 try {
                     if (e && typeof e.preventDefault === 'function') e.preventDefault();
-                    const cat = btn.dataset.category;
+                    let cat = btn.dataset.category;
                     console.debug('[ProjectController] filter clicked →', cat);
 
-                    const matched = projectService.list(cat);
+                    let matched = projectService.list(cat);
                     console.debug('[ProjectController] matched projects:', matched.map(p => p.id));
+
+                    // si no hay proyectos en la categoría elegida, mantenemos "Todos"
+                    if (matched.length === 0) {
+                        console.debug('[ProjectController] categoría vacía, restaurando todos');
+                        cat = 'all';
+                        matched = projectService.list(cat);
+                    }
 
                     projectView.setActiveFilterBtn(cat);
                     projectView.renderList(matched);
-
-                    try { localStorage.setItem('portfolio:selectedCategory', cat); } catch (err) { /* ignore */ }
+                    // no persistence needed cuando "Todos" es el comportamiento por defecto
                 } catch (err) {
                     console.error('[ProjectController] error handling filter click', err);
-                    // mostrar mensaje al usuario (no-results) como fallback
                     const noResults = document.querySelector('.no-results');
                     if (noResults) noResults.hidden = false;
                 }
             });
         });
 
-        // Initial render (persist last selected category) — sanitize saved value
-        let saved = (function() { try { return localStorage.getItem('portfolio:selectedCategory'); } catch (err) { return null; } })() || 'all';
-        // If saved category has no projects (or the button was removed), fallback to 'all'
-        if (!projectService.list(saved).length) saved = 'all';
-        projectView.setActiveFilterBtn(saved);
-        projectView.renderList(projectService.list(saved));
+        // Initial render — always show "Todos" by default and ignore any previous selection
+        // (removing persistence ensures proyectos aparecen por defecto en todos)
+        const defaultCategory = 'all';
+        projectView.setActiveFilterBtn(defaultCategory);
+        projectView.renderList(projectService.list(defaultCategory));
 
         // Actualizar contador de favoritos en header
         try { updateHeaderFavoritesCount(); } catch (e) { /* ignore */ }
+
+        // Observador que solo la primera vez que la sección de proyectos
+        // se hace visible la fuerza el filtro "Todos" y luego se desconecta.
+        (function observeProjectsSectionOnce() {
+            const section = document.getElementById('proyectos');
+            if (!section) return;
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const defaultCat = 'all';
+                        projectView.setActiveFilterBtn(defaultCat);
+                        projectView.renderList(projectService.list(defaultCat));
+                        // ya cumplido, desconectar para no interferir con filtros manuales
+                        obs.disconnect();
+                        console.debug('[ProjectController] observer disconnected after first intersection');
+                    }
+                });
+            }, { threshold: 0.5 });
+            observer.observe(section);
+        })();
 
         // Bind favorite buttons that exist in the static DOM (fallback cards)
         document.querySelectorAll('.proyecto-card').forEach(card => {
